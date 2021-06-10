@@ -1,0 +1,15 @@
+configuration {
+  terminal: "kitty";
+  show-icons: true;
+  icon-theme: "Papirus Dark";
+  drun-show-actions: true;
+  modi: "combi,window,drun";
+  combi-modi: "window,drun";
+  show: "combi";
+  auto-select: false;
+  hide-scrollbar: false;
+  sidebar-mode: true;
+  theme: "~/.local/share/rofi/themes/onedark.rasi";
+}
+
+/* vim: ft=css */

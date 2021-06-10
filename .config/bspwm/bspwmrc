@@ -1,0 +1,71 @@
+#!/bin/sh
+
+##### Autostart #####
+# Set cursor
+xsetroot -cursor_name left_ptr &
+# Shortcuts
+if ! pgrep -x "sxhkd" > /dev/null; then
+  sxhkd &
+fi
+# Start compositor, set wallpaper and colors
+if ! pgrep -x "picom" > /dev/null; then
+  picom &
+  # Set the wallpaper
+  feh --bg-scale $HOME/Imágenes/Wallpapers/cat-girl.png &
+  xset -b & # For annoying beeping sounds
+fi
+# Start pipewire
+if ! pgrep -x "pipewire" > /dev/null; then
+  pipewire &
+fi
+# Start KWallet for passwords (including wifi passwords)
+if ! pgrep -x "kwalletd5" > /dev/null; then
+  /usr/lib/pam_kwallet_init &
+  /usr/libexec/kf5/polkit-kde-authentication-agent-1
+fi
+# Start polybar
+if ! pgrep -x "polybar" > /dev/null; then
+  $HOME/.config/polybar/launch.sh &
+fi
+# Start NetworkManager applet for polybar
+if ! pgrep -x "nm-applet" > /dev/null; then
+  nm-applet &
+fi
+# Start dunst notifications
+if ! pgrep -x "dunst" > /dev/null; then
+  dunst &
+fi
+
+##### Workspaces and Borders #####
+bspc monitor -d I II III IV V
+
+bspc config border_width 0
+bspc config border_radius 10
+bspc config window_gap 15
+bspc config split_ratio 0.5
+bspc config borderless_monocle false
+bspc config gapless_monocle false
+
+bspc config top_padding 40
+bspc config bottom_padding 5
+bspc config left_padding 0
+bspc config right_padding 0
+
+bspc rule -a codium state=tiled desktop=^1 follow=off
+bspc rule -a kitty state=tiled desktop=^1 follow=on
+bspc rule -a Brave state=tiled desktop=^2 follow=on
+bspc rule -a Discord state=tiled desktop=^3 follow=off
+bspc rule -a dolphin state=floating follow=on
+bspc rule -a telegram state=tiled desktop=^3 follow=on
+bspc rule -a wps state=tiled desktop=^5 follow=on
+
+# Focus on pointer
+bspc config focus_follows_pointer true
+bspc config pointer_follows_focus true
+
+# Set the border colors.
+bspc config normal_border_color "#1c1d27"
+bspc config active_border_color "#23d18c"
+bspc config focused_border_color "#23d18c"
+bspc config urgent_border_color "#eb4855"
+bspc config presel_feedback_color "#00cecb"

@@ -1,0 +1,21 @@
+# working directories aliases
+alias dev="$HOME/Development"
+alias vdev="$HOME/Development/Vlang"
+alias pydev="$HOME/Development/Python"
+alias nodev="$HOME/Development/Node"
+alias asmdev="$HOME/Development/ASM"
+alias bluxdev="$HOME/Development/Blux"
+alias miscdev="$HOME/Development/Misc"
+alias nvimdev="$HOME/Development/Nvim"
+alias doomdev="$HOME/Development/Nvim/doom-nvim"
+
+# lsd aliases
+alias ls="lsd"
+alias la="lsd -A"
+alias ll="lsd -l"
+alias lsa="lsd -lA"
+alias lt="lsd -A --tree --depth=3 -I .git -I node_modules"
+
+# kitty aliases
+alias dcat="kitty +kitten diff"
+alias icat="kitty +kitten icat"
