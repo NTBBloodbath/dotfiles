@@ -80,9 +80,9 @@ setup for Neovim (Neovim nightly required).
 
 ### Wallpapers
 
-|                    Clang Anime Girl                    |               Nordic               |                   Cyberpunk 2077                   |
-| :----------------------------------------------------: | :--------------------------------: | :------------------------------------------------: |
-| ![clang_anime_girl](./wallpapers/clang_anime_girl.png) | ![nordic](./wallpapers/nordic.jpg) | ![cyberpunk 2077](./wallpapers/cyberpunk-2077.jpg) |
+|                    Clang Anime Girl                    |                Cat girl                |               Nordic               |
+| :----------------------------------------------------: |:--------------------------------------:| :--------------------------------: |
+| ![clang_anime_girl](./wallpapers/clang_anime_girl.png) | ![cat girl](./wallpapers/cat-girl.png) | ![nordic](./wallpapers/nordic.jpg) |
 
 > All the credits of the images go to their authors (I don't know what they are).
 >
