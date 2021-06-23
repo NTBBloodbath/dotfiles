@@ -15,11 +15,10 @@
 ;                                                ;
 ;------------------------------------------------;
 [colors]
-##### OneDark colorscheme #####
-background = #181818
+##### doom-one colorscheme #####
+background = #21242a
 foreground = #bbc2cf
 
-# Normal colors
 black   = #1c1d27
 red     = #ff6c6b
 green   = #98be65
@@ -29,7 +28,7 @@ magenta = #c768dd
 cyan    = #46D9FF
 white   = #efefef
 
-# Bright colors
+##### OneDark colorscheme #####
 black-alt   = #1c1d27
 red-alt     = #e06c75
 green-alt   = #98c379
@@ -47,10 +46,10 @@ margin-bottom = 0
 
 ;------------------------------------------------;
 ;                                                ;
-;                   BAR MODULE                   ;
+;                BSPWM BAR MODULE                ;
 ;                                                ;
 ;------------------------------------------------;
-[bar/future]
+[bar/bspwm]
 width = 99%
 height = 20
 offset-x = 0.5%
@@ -94,82 +93,161 @@ font-1 = "FiraCode Nerd Font Mono:size=14;3"
 wm-restack = bspwm
 
 ;------------------------------------------------;
+
+;------------------------------------------------;
+;                                                ;
+;             AWESOME BAR MODULES                ;
+;                                                ;
+;------------------------------------------------;
+
+[bar/awesome-top]
+width = 99%
+height = 20
+offset-x = 0.5%
+offset-y = 1%
+radius = 10.0
+fixed-center = true
+
+monitor = default
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = ${colors.red}
+
+border-size = 4
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+tray-padding = 4
+tray-position = right
+
+; Required to display notifications
+enable-ipc = true
+
+modules-left = menu-apps right-apps left-volume pavolume right-volume left-dunst dunst right-dunst
+modules-center = awesome
+modules-right = left-date date right-date left-powermenu powermenu right-powermenu
+
+font-0 = "Roboto:size=8;2"
+font-1 = "Iosevka Nerd Font Mono:size=12;3"
+
+wm-restack = generic
+
+[bar/awesome-bottom-left]
+width = 19%
+height = 20
+offset-x = 0.5%
+offset-y = 1%
+radius = 10.0
+fixed-center = true
+
+monitor = default
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = ${colors.red}
+
+border-size = 4
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+bottom = true
+
+modules-left = memory right-memory
+modules-right = left-cpu cpu
+
+font-0 = "Roboto:size=8;2"
+font-1 = "Iosevka Nerd Font Mono:size=12;3"
+
+[bar/awesome-bottom-center]
+width = 35%
+height = 20
+offset-x = 32%
+offset-y = 1%
+fixed-center = true
+
+monitor = default
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = ${colors.red}
+
+border-size = 4
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+bottom = true
+
+modules-center = cmus
+
+font-0 = "Roboto:size=8;2"
+font-1 = "Iosevka Nerd Font Mono:size=14;4"
+
+[bar/awesome-bottom-right]
+width = 18.5%
+height = 20
+offset-x = 81%
+offset-y = 1%
+fixed-center = true
+
+monitor = default
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = ${colors.red}
+
+border-size = 4
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+bottom = true
+
+modules-center = github
+
+font-0 = "Roboto:size=8;2"
+font-1 = "Iosevka Nerd Font Mono:size=16;3"
+
+;------------------------------------------------;
 ;                                                ;
 ;                   MENU PARAMETERS              ;
 ;                                                ;
 ;------------------------------------------------;
 [module/menu-apps]
-type = custom/menu
+type = custom/text
 
-expand-right = true
-label-open = ""
-label-open-padding = 2
-label-open-background = ${colors.red}
-label-open-foreground = ${colors.black}
-label-close = ""
-label-close-padding = 2
-label-close-background = ${colors.red}
-label-close-foreground = ${colors.black}
-label-separator = "  "
-label-separator-background = ${colors.red}
-label-separator-foreground = ${colors.black}
-
-menu-padding = 2
-menu-0-0 = Development
-menu-0-0-exec = #menu-apps.open.1
-menu-0-0-background = ${colors.red}
-menu-0-0-foreground = ${colors.black}
-menu-0-1 = Brave
-menu-0-1-exec = brave-browser
-menu-0-1-background = ${colors.red}
-menu-0-1-foreground = ${colors.black}
-menu-0-2 = Social
-menu-0-2-exec = #menu-apps.open.2
-menu-0-2-background = ${colors.red}
-menu-0-2-foreground = ${colors.black}
-menu-0-3 = Office
-menu-0-3-exec = #menu-apps.open.3
-menu-0-3-background = ${colors.red}
-menu-0-3-foreground = ${colors.black}
-
-menu-1-0 = Terminal
-menu-1-0-exec = kitty
-menu-1-0-background = ${colors.red}
-menu-1-0-foreground = ${colors.black}
-menu-1-1 = Neovim
-menu-1-1-exec = nvim
-menu-1-1-background = ${colors.red}
-menu-1-1-foreground = ${colors.black}
-menu-1-2 = Codium
-menu-1-2-exec = codium
-menu-1-2-background = ${colors.red}
-menu-1-2-foreground = ${colors.black}
-menu-1-3 = File Manager
-menu-1-3-exec = dolphin
-menu-1-3-background = ${colors.red}
-menu-1-3-foreground = ${colors.black}
-
-menu-2-0 = Discord
-menu-2-0-exec = ~/Applications/lightcord_3107acaf1af1ce1a7db6086aa25286df.AppImage
-menu-2-0-background = ${colors.red}
-menu-2-0-foreground = ${colors.black}
-menu-2-1 = Telegram
-menu-2-1-exec = telegram-desktop
-menu-2-1-background = ${colors.red}
-menu-2-1-foreground = ${colors.black}
-menu-2-2 = WhatsApp
-menu-2-2-exec = ~/Applications/Altus-4.0.0_b35837c117d98d3734886c96d7d12a3f.AppImage
-menu-2-2-background = ${colors.red}
-menu-2-2-foreground = ${colors.black}
-
-menu-3-0 = WPS Office
-menu-3-0-exec = wps
-menu-3-0-background = ${colors.red}
-menu-3-0-foreground = ${colors.black}
-menu-3-1 = Zathura
-menu-3-1-exec = zathura
-menu-3-1-background = ${colors.red}
-menu-3-1-foreground = ${colors.black}
+content = ""
+content-padding = 2
+content-background = ${colors.red}
+content-foreground = ${colors.black}
+click-left = exec rofi -show combi
 
 ;------------------------------------------------;
 ;                                                ;
@@ -207,6 +285,50 @@ label-occupied-padding = 1
 
 label-empty = %icon%
 label-empty-foreground = ${colors.black-alt}
+label-empty-padding = 1
+
+;------------------------------------------------;
+;                                                ;
+;               XWORKSPACES PAMETERS             ;
+;                                                ;
+;------------------------------------------------;
+[module/awesome]
+type = internal/xworkspaces
+
+pin-workspaces = false
+
+enable-click = true
+enable-scroll = true
+
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-default = 
+
+format = <label-state>
+
+label-monitor = %name%
+
+label-active = 
+label-active-background = ${colors.background}
+label-active-foreground = ${colors.blue}
+label-active-padding = 1
+
+label-occupied = 
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.foreground}
+label-occupied-padding = 1
+
+label-urgent = 
+label-urgent-background = ${colors.background}
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 1
+
+label-empty = 
+label-empty-background = ${colors.background}
+label-empty-foreground = ${colors.white}
 label-empty-padding = 1
 
 ;------------------------------------------------;
@@ -281,7 +403,7 @@ menu-0-0-exec = reboot
 menu-0-1 = "Shutdown"
 menu-0-1-exec = poweroff
 menu-0-2 = "Log out"
-menu-0-2-exec = bspc quit
+menu-0-2-exec = awesome quit
 
 ;------------------------------------------------;
 ;                                                ;
@@ -293,12 +415,12 @@ type = internal/memory
 interval = 2
 
 format = <label>
-format-prefix = "  "
-format-background = ${colors.magenta}
+format-prefix = "   "
+format-background = ${colors.green}
 format-foreground = ${colors.black}
 
 label = RAM: %percentage_used%%
-label-background = ${colors.magenta}
+label-background = ${colors.green}
 label-foreground = ${colors.black}
 
 ;------------------------------------------------;
@@ -312,12 +434,32 @@ interval = 2
 
 format = <label>
 format-prefix = "  "
-format-background = ${colors.green}
+format-background = ${colors.magenta}
 format-foreground = ${colors.black}
 
 label = CPU: %percentage%%
-label-background = ${colors.green}
+label-padding = 1
+label-background = ${colors.magenta}
 label-foreground = ${colors.black}
+
+;------------------------------------------------;
+;                                                ;
+;            GITHUB MODULE PARAMETERS            ;
+;                                                ;
+;------------------------------------------------;
+[module/github]
+type = internal/github
+
+interval = 30
+
+token = ${env:GITHUB_TOKEN}
+user = NTBBloodbath
+
+empty-notifications = true
+api-url = https://api.github.com/
+
+label =   Notifications: %notifications%
+label-offline =   Offline
 
 ;------------- USER DEFINED MODULES --------------
 ; These modules require scripts to run, you can find
@@ -336,30 +478,51 @@ label=%output%%
 label-padding = 2
 label-background = ${colors.green}
 label-foreground = ${colors.black}
-exec = ~/.config/polybar/pavolume.sh
+exec = ~/.config/polybar/scripts/pavolume.sh
 click-right = exec pavucontrol
-click-left = ~/.config/polybar/pavolume.sh --togmute
-scroll-up = ~/.config/polybar/pavolume.sh --up
-scroll-down = ~/.config/polybar/pavolume.sh --down
+click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
+scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
 
-;------------------------------------------------;
-;                                                ;
-;             SEPARATORS PARAMETERS              ;
-;                                                ;
-;------------------------------------------------;
+;-----------------------------------------------;
+;                                               ;
+;               Browser media control           ;
+;                                               ;
+;-----------------------------------------------;
+[module/cmus]
+type = custom/script
+
+exec = ~/.config/polybar/scripts/cmus.sh
+interval = 1
+
+click-left = cmus-remote --pause
+scroll-down = cmus-remote --next
+scroll-up = cmus-remote --prev
+
+label-maxlen = 150
+
+;-----------------------------------------------;
+;                                               ;
+;             SEPARATORS PARAMETERS             ;
+;                                               ;
+;-----------------------------------------------;
 [module/left-glyph]
 type = custom/text
-content = %{T5}%{T-}
+content = "  "
 content-background=${colors.background}
 
 [module/right-glyph]
 type = custom/text
-content = %{T5}%{T-}
+content = "  "
 content-background=${colors.background}
+
+[module/left-apps]
+inherit = module/left-glyph
+content-foreground = ${module/menu-apps.content-background}
 
 [module/right-apps]
 inherit = module/right-glyph
-content-foreground = ${module/menu-apps.label-open-background}
+content-foreground = ${module/menu-apps.content-background}
 
 [module/left-volume]
 inherit = module/left-glyph
@@ -387,10 +550,12 @@ content-foreground = ${module/date.label-background}
 
 [module/left-memory]
 inherit = module/left-glyph
+content-background = ${colors.background}
 content-foreground = ${module/memory.label-background}
 
 [module/right-memory]
 inherit = module/right-glyph
+content-background = ${colors.background}
 content-foreground = ${module/memory.label-background}
 
 [module/left-cpu]

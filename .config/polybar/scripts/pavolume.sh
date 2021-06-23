@@ -72,7 +72,8 @@ function volDown {
 }
 
 function getSinkInputs {
-    input_array=$(pactl list sinks | grep -A 15 "Estado: RUNNING" | grep -B 4 "Nombre: $1 " | awk '/Name/{ print $2 }')
+    input_array=$(pactl list sinks | grep -A 15 "Estado: RUNNING" | grep -B 4 "Nombre: $1 " | awk '/Nombre/{ print $2 }')
+    echo "${input_array[@]}"
 }
 
 function volSync {
@@ -90,6 +91,7 @@ function getCurVol {
 }
 
 function volMute {
+    echo "$1"
     case "$1" in
         mute)
             pactl set-sink-mute "$active_sink" 1
@@ -97,6 +99,7 @@ function volMute {
             status=1
             ;;
         unmute)
+            echo "$active_sink"
             pactl set-sink-mute "$active_sink" 0
             getCurVol
             status=0
@@ -107,11 +110,10 @@ function volMute {
     then
         qdbus-qt5 org.kde.kded5 /modules/kosd showVolume "${curVol}" "${status}"
     fi
-
 }
 
 function volMuteStatus {
-    curStatus=$(pactl list sinks | grep -A 15 "Estado: RUNNING" | grep -A 15 "Nombre: $active_sink" | awk '/Mute/{ print $2 }')
+    curStatus=$(pactl list sinks | grep -A 15 "Estado: RUNNING" | grep -A 15 "Nombre: $active_sink" | awk '/Silencio/{ print $2 }')
 }
 
 # Prints output for bar
@@ -148,7 +150,7 @@ function output() {
     reloadSink
     getCurVol
     volMuteStatus
-    if [ "${curStatus}" = 'yes' ]
+    if [ "${curStatus}" = 'sí' ]
     then
         echo "婢  $curVol"
     else
@@ -166,7 +168,7 @@ case "$1" in
         ;;
     --togmute)
         volMuteStatus
-        if [ "$curStatus" = 'yes' ]
+        if [ "$curStatus" = 'sí' ]
         then
             volMute unmute
         else

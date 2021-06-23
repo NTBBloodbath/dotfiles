@@ -1,15 +1,15 @@
 configuration {
   terminal: "kitty";
   show-icons: true;
-  icon-theme: "Papirus Dark";
+  icon-theme: "Tela circle dark";
   drun-show-actions: true;
   modi: "combi,window,drun";
   combi-modi: "window,drun";
   show: "combi";
   auto-select: false;
-  hide-scrollbar: false;
+  hide-scrollbar: true;
   sidebar-mode: true;
-  theme: "~/.local/share/rofi/themes/onedark.rasi";
+  theme: "~/.local/share/rofi/themes/doom-one.rasi";
 }
 
-/* vim: ft=css */
+// vim: ft=css

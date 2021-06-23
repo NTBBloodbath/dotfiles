@@ -22,13 +22,14 @@
 
 - Environment setup
   - Wallpapers
-  - Configurations (dynamic colors using pywal)
+  - Configurations
     - bspwm + [bsp-layout](https://github.com/phenax/bsp-layout)
+    - awesome
     - dunst
     - polybar
     - rofi
     - sxhkd
-    - picom
+    - picom (A johanburg's fork up-to-date)
 - Other configurations
   - Shells
     - ZSH (zinit)
