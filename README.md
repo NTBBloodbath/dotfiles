@@ -81,9 +81,9 @@ setup for Neovim (Neovim nightly required).
 
 ### Wallpapers
 
-|                    Clang Anime Girl                    |                Cat girl                |               Nordic               |
-| :----------------------------------------------------: |:--------------------------------------:| :--------------------------------: |
-| ![clang_anime_girl](./wallpapers/clang_anime_girl.png) | ![cat girl](./wallpapers/cat-girl.png) | ![nordic](./wallpapers/nordic.jpg) |
+|                    Clang Anime Girl                    |                Cat girl                |                Nord Waifu              |
+| :----------------------------------------------------: |:--------------------------------------:| :------------------------------------: |
+| ![clang_anime_girl](./wallpapers/clang_anime_girl.png) | ![cat girl](./wallpapers/cat-girl.png) | ![nordic](./wallpapers/nord_waifu.png) |
 
 > All the credits of the images go to their authors (I don't know what they are).
 >

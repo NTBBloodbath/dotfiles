@@ -11,5 +11,7 @@ return {
 		os.getenv('HOME') .. '/.config/polybar/launch.sh awesome-top awesome-bottom-left awesome-bottom-center awesome-bottom-right',
         -- Terminal
         apps.terminal,
+        -- Screenshots tool
+        'flameshot',
 	},
 }

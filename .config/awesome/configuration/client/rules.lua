@@ -72,7 +72,7 @@ awful.rules.rules = {
 	},
 	{
 		rule = { name = 'Telegram' },
-		properties = { screen = 1, tag = '3' },
+		properties = { screen = 1, tag = '4' },
 	},
 	{
 		rule = { name = 'Discord' },

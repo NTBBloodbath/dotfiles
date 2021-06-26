@@ -161,24 +161,6 @@ local globalkeys = gears.table.join(
 		description = 'open a terminal',
 		group = 'launcher',
 	}),
-	awful.key({ modkey }, 'Print', function()
-		awful.spawn.with_shell('spectacle -b -f')
-	end, {
-		description = 'Fullscreen screenshot',
-		group = 'utilities',
-	}),
-	awful.key({ modkey }, 'r', function()
-		awful.spawn.with_shell('spectacle -b -r')
-	end, {
-		description = 'Region screenshot',
-		group = 'utilities',
-	}),
-    awful.key({ modkey }, 'a', function()
-        awful.spawn.with_shell('spectacle -b -a')
-    end, {
-        description = 'Capture the active window',
-        group = 'utilities',
-    }),
 
 	awful.key({ modkey }, 'l', function()
 		awful.tag.incmwfact(0.05)
