@@ -7,7 +7,7 @@
     <img src="./images/awesome-demo.png" alt="AwesomeWM demo" />
 </div>
 
-> Much of my setup uses the onedark color scheme.
+> Much of my setup uses the doom emacs doom-one colorscheme.
 
 ## Content
 
