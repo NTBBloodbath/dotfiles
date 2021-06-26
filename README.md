@@ -4,7 +4,7 @@
         These are my personal dotfiles for my GNU/Linux
         development environments.
     </p>
-    <img src="./images/bspwm-demo.png" alt="bspwm demo" />
+    <img src="./images/awesome-demo.png" alt="AwesomeWM demo" />
 </div>
 
 > Much of my setup uses the onedark color scheme.
