@@ -55,7 +55,7 @@ awful.rules.rules = {
 		properties = { floating = true },
 	},
 
-	-- Add titlebars to normal clients and dialogs
+	-- Do not add titlebars to normal clients and dialogs
 	{
 		rule_any = { type = { 'normal', 'dialog' } },
 		properties = { titlebars_enabled = false },
@@ -63,8 +63,18 @@ awful.rules.rules = {
 
 	-- Set windows tags and other custom properties
 	{
-		rule = { class = 'Chrome' },
-		properties = { screen = 1, tag = '2' },
+		rule = { class = 'Google-chrome' },
+		properties = {
+			screen = 1,
+			tag = '2',
+			focusable = true,
+			maximized_vertical = false,
+			maximized_horizontal = false,
+		},
+	},
+	{
+	    rule = { class = 'zeal' },
+	    properties = { screen = 1, tag = '1', focusable = true },
 	},
 	{
 		rule = { class = 'kitty' },
@@ -75,7 +85,7 @@ awful.rules.rules = {
 		properties = { screen = 1, tag = '4' },
 	},
 	{
-		rule = { name = 'Discord' },
+		rule = { class = 'discord' },
 		properties = { screen = 1, tag = '3' },
 	},
 	{

@@ -16,7 +16,8 @@
 ;------------------------------------------------;
 [colors]
 ##### doom-one colorscheme #####
-background = #21242a
+; #21242a
+background = #1f1f1f
 foreground = #bbc2cf
 
 black   = #1c1d27

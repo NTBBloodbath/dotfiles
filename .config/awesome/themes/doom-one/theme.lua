@@ -16,7 +16,7 @@ theme.dir = string.format(
 theme.icon_theme = 'Tela-circle-dark'
 
 theme.font = 'Roboto 10'
-theme.wallpaper = theme.dir .. 'nord_waifu.png'
+theme.wallpaper = theme.dir .. '/walls/zero_two.jpg'
 
 theme.bg_normal = '#282c34'
 theme.bg_focus = '#3E4556'

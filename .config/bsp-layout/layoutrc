@@ -1,7 +1,0 @@
-
-# Tall layout config
-TALL_RATIO=0.6;
-
-# Wide layout config
-WIDE_RATIO=0.6;
-
