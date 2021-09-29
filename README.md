@@ -55,9 +55,9 @@ setup for Neovim (Neovim nightly required).
 
 ### Wallpapers
 
-|                    Clang Anime Girl                    |                Cat girl                |                Nord Waifu              |
+|                    Tohru (manga)                    |                Cat girl                |                Okita Souji              |
 | :----------------------------------------------------: |:--------------------------------------:| :------------------------------------: |
-| ![clang_anime_girl](./wallpapers/clang_anime_girl.png) | ![cat girl](./wallpapers/cat-girl.png) | ![nordic](./wallpapers/nord_waifu.png) |
+| ![tohru](./.local/share/wallpapers/tohru_manga.png) | ![cat girl](./.local/share/wallpapers/cat-girl.png) | ![okita](./.local/share/wallpapers/okita-souji_FHD.jpg) |
 
 > All the credits of the images go to their authors (I don't know what they are).
 >
