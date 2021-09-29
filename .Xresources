@@ -1,0 +1,26 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+/* rofi.color-enabled: true */
+!                  Background   Foreground  Background Alternate    Highlight Background    Highlight Foreground
+/* rofi.color-window: #131620,     #c7a57c,    #131620
+rofi.color-normal: #131620,     #c7a57c,    #131620,                #7c7d7c,                #131620
+rofi.color-active: #131620,     #c7a57c,    #131620,                #7c7d7c,                #131620
+rofi.color-urgent: #FF5555,     #070015,    #FF5555,                #7c7d7c,                #131620
+rofi.terminal: kitty
+rofi.fuzzy: true
+rofi.kb-cancel: Escape,Control+c
+rofi.sidebar-mode: true
+rofi.hide-scrollbar: true
+rofi.separator-style: dash
+rofi.modi: combi,drun,run,window
+rofi.combi-modi: window,drun
+rofi.show: combi
+rofi.show-icons: true
+*/
+
+! Change DPI, 1360x768 = 91.87
+Xft.dpi: 85
+
+! Set cursor theme
+Xcursor.theme: Bibata-Modern-Ice

@@ -1,0 +1,70 @@
+# Zathura configuration file
+# See man `man zathurarc'
+map r reload
+map p print
+map i recolor
+map J zoom out
+map K zoom in
+map R rotate
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+# zoom settings
+set zoom-min 10
+set guioptions ""
+
+set font "Roboto 16"
+
+# Zathura doom-one
+set notification-error-bg       "#ff6c6b"
+set notification-error-fg       "#bbc2cf"
+set notification-warning-bg     "#ECBE7D"
+set notification-warning-fg     "#bbc2cf"
+set notification-bg             "#282c34"
+set notification-fg             "#bbc2cf"
+
+set completion-group-bg         "#21242b"
+set completion-group-fg         "#bbc2cf"
+set completion-bg               "#21252a"
+set completion-fg               "#bbc2cf"
+set completion-highlight-bg     "#2257A0"
+set completion-highlight-fg     "#5B6268"
+
+# Define the color in index mode
+set index-bg                    "#21252a"
+set index-fg                    "#bbc2cf"
+set index-active-bg             "#3E4556"
+set index-active-fg             "#bbc2cf"
+
+set inputbar-bg                 "#3E4556"
+set inputbar-fg                 "#bbc2cf"
+
+set statusbar-bg                "#21242b"
+set statusbar-fg                "#bbc2cf"
+
+set highlight-color             "#2257A0" # hightlight match when search keyword(vim's /)
+set highlight-active-color      "#51afef"
+
+set default-bg                  "#282c34"
+set default-fg                  "#bbc2cf"
+set render-loading              true
+set render-loading-fg           "#bbc2cf"
+set render-loading-bg           "#282c34"
+
+# Recolor book content's color
+set recolor                     true
+set recolor-lightcolor          "#282c34"
+set recolor-darkcolor           "#bbc2cf"
+set recolor-keephue             true      # keep original color

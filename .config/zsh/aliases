@@ -1,0 +1,150 @@
+# {{{ Directories
+# Utilities
+function create_dir_and_cd() {
+  if [[ -z "$1" ]]; then
+    echo 'Usage: mkc <path>'
+  else
+    mkdir -p "$1"
+    cd "$1"
+  fi
+}
+alias mkc='create_dir_and_cd '
+
+function rename_dir_and_cd() {
+  if [[ -z "$1" || -z "$2" ]]; then
+    echo 'Usage: mvc <old_path> <new_path>'
+  else
+    mv "$1" "$2"
+    cd "$2"
+  fi
+}
+alias mvc='rename_dir_and_cd '
+
+# Updirs
+alias {up,..}='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+# Development directories
+alias dev="$HOME/Development"
+alias cdev="$HOME/Development/Clang"
+alias vdev="$HOME/Development/Vlang"
+alias pydev="$HOME/Development/Python"
+alias nodev="$HOME/Development/Node"
+alias hskdev="$HOME/Development/Haskell"
+alias miscdev="$HOME/Development/Misc"
+alias rustdev="$HOME/Development/Rust"
+alias nvimdev="$HOME/Development/Nvim"
+alias doomdev="$HOME/.config/nvim"
+# }}}
+
+# {{{ Listing
+alias ls='lsd'
+alias la='lsd -A'
+alias ll='lsd -l'
+alias lsa='lsd -lA'
+alias lt='lsd -A --tree --depth=3 -I .git -I node_modules'
+# }}}
+
+# {{{ Archives
+function extract() {
+  if [[ -z "$1" ]]; then
+    echo 'Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>'
+  else
+    if [[ -f "$1" ]]; then
+      case "$1" in
+        *.tar.bz2) tar xvjf "$1" ;;
+        *.tar.gz) tar xvzf "$1" ;;
+        *.tar.xz) tar xvJf "$1" ;;
+        *.lzma) unlzma "$1" ;;
+        *.bz2) bunzip2 "$1" ;;
+        *.rar) unrar x -ad "$1" ;;
+        *.gz) gunzip "$1" ;;
+        *.tar) tar xvf "$1" ;;
+        *.tbz) tar xvjf "$1" ;;
+        *.tbz2) tar xvjf "$1" ;;
+        *.tgz) tar xvzf "$1" ;;
+        *.zip) unzip "$1" ;;
+        *.Z) uncompress "$1" ;;
+        *.7z) 7z x "$1" ;;
+        *.xz) unxz "$1" ;;
+        *.exe) cabextract "$1" ;;
+        *) echo "extract: '$1' - unknown archive method" ;;
+      esac
+    else
+      echo "$1 - file does not exist"
+    fi
+  fi
+}
+alias extr='extract '
+
+function extract_and_remove() {
+  extract "$1"
+  rm -f "$1"
+}
+alias extrr='extract_and_remove '
+# }}}
+
+# {{{ Git
+alias gcl='git clone '
+alias gst='git status'
+alias {gbra,gb}='git branch '
+alias {gco,go}='git checkout '
+alias {gcob,gob}='git checkout -b '
+alias {gadd,ga}='git add '
+alias {gdff,gd}='git diff '
+alias {gcom,gc}='git commit '
+alias {gpul,gl}='git pull '
+alias {gpus,gp}='git push '
+alias glom='git pull origin main'
+alias ghom='git push origin main'
+alias gg='git grep '
+alias gs='git switch '
+alias gr='git restore '
+alias grs='git restore --staged '
+alias gwa='git worktree add '
+alias gwp='git worktree prune'
+# }}}
+
+# {{{ System
+# Utilities
+alias df='df -h'
+alias du='du -h'
+
+# Make
+# CORES="$(nproc)"
+# JOBS="$(expr $CORES + 1)"
+# alias make="make -j$JOBS"
+
+# Neovim
+alias vi='nvim '
+
+# Wget
+function wget_archive_and_extract() {
+  local -r URL="$1"
+  local -r FILENAME="${URL##*/}"
+  wget "$URL" -O "$FILENAME"
+  extract "$FILENAME"
+  rmi "$FILENAME"
+}
+alias wgetae='wget_archive_and_extract '
+
+# }}}
+
+# {{{ Kitty
+alias dcat="kitty +kitten diff"
+alias icat="kitty +kitten icat"
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  alias ssh="kitty +kitten ssh"
+fi
+# }}}
+
+# {{{ theme.sh
+alias th='theme.sh -i'
+alias thl='theme.sh --light -i'
+alias thd='theme.sh --dark -i'
+# }}}
+
+# vim: fdm=marker ft=bash sw=2 ts=2
