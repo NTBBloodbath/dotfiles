@@ -1,5 +1,0 @@
-* Default
-** emacs
- - path :: ~/.config/emacs
-** lcfetch
- - path :: ~/Development/Clang/lcfetch

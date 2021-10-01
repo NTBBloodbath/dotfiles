@@ -1,5 +1,8 @@
 # Directories
+.cache/
+backups/
 straight/
+transient/
 auto-save-list/
 
 # Local files
