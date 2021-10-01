@@ -93,6 +93,9 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 # Editor
 export EDITOR=nvim
 
+# Language
+export LANG=en_us.UTF-8
+
 # Tokens and API keys
 [[ ! -f $XDG_CONFIG_HOME/zsh/tk.zsh ]] || source $XDG_CONFIG_HOME/zsh/tk.zsh
 
@@ -100,7 +103,7 @@ export EDITOR=nvim
 export MANPAGER="nvim +Man!"
 
 # Start lenv (Lua version manager)
-source ~/.lenvrc
+[[ ! -f $HOME/.lenvrc ]] || source $HOME/.lenvrc
 
 # Load the most recently selected theme automatically (using theme.sh)
 # if command -v theme.sh > /dev/null; then
@@ -178,9 +181,10 @@ zinit wait lucid light-mode for \
 zinit ice wait lucid
 zinit snippet $XDG_CONFIG_HOME/zsh/aliases
 # }}}
-# }}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $XDG_CONFIG_HOME/zsh/p10k.zsh ]] || source $XDG_CONFIG_HOME/zsh/p10k.zsh
+
+# }}}
 
 # vim: fdm=marker sw=2 ts=2
