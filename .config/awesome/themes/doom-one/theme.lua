@@ -11,12 +11,17 @@ theme.dir = string.format(
 	os.getenv('HOME')
 )
 
+local walls_dir = string.format(
+    '%s/wallpapers',
+    os.getenv('XDG_DATA_HOME')
+)
+
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = 'Tela-circle-dark'
 
 theme.font = 'Noto Sans 10'
-theme.wallpaper = theme.dir .. '/walls/GhostHeart.png'
+theme.wallpaper = string.format('%s/tohru_manga.png', walls_dir)
 
 theme.bg_normal = '#282c34'
 theme.bg_focus = '#3E4556'
