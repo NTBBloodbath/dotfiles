@@ -3,6 +3,8 @@
 ;; Author:  NTBBloodbath <bloodbathalchemist@protonmail.com>
 ;; URL:     https://github.com/NTBBloodbath/bloodymacs
 ;; License: MIT
+;;
+;;; Code:
 
 ;; straight.el bootstrapping
 (defvar bootstrap-version)
@@ -239,6 +241,8 @@
   :hook (prog-mode . yas-minor-mode)
   :config
   (yas-reload-all))
+(use-package yasnippet-snippets
+  :after (yasnippet))
 
 ;; Rainbow pars
 (use-package rainbow-delimiters

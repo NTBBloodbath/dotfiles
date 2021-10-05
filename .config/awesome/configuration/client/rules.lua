@@ -104,6 +104,10 @@ awful.rules.rules = {
 		properties = { screen = 1, tag = '1', focusable = true },
 	},
 	{
+	    rule = { class = 'Emacs' },
+	    properties = { screen = 1, tag = '1' },
+	},
+	{
 		rule = { name = 'Telegram' },
 		properties = { screen = 1, tag = '4' },
 	},

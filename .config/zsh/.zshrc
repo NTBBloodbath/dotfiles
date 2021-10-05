@@ -94,7 +94,7 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export EDITOR=nvim
 
 # Language
-export LANG=en_us.UTF-8
+# export LANG="en_us.UTF-8"
 
 # Tokens and API keys
 [[ ! -f $XDG_CONFIG_HOME/zsh/tk.zsh ]] || source $XDG_CONFIG_HOME/zsh/tk.zsh

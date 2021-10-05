@@ -2,30 +2,33 @@
 # Utilities
 function create_dir_and_cd() {
   if [[ -z "$1" ]]; then
-    echo 'Usage: mkc <path>'
+    echo "Usage: mkc <path>"
   else
     mkdir -p "$1"
     cd "$1"
   fi
 }
-alias mkc='create_dir_and_cd '
+alias mkc="create_dir_and_cd "
 
 function rename_dir_and_cd() {
   if [[ -z "$1" || -z "$2" ]]; then
-    echo 'Usage: mvc <old_path> <new_path>'
+    echo "Usage: mvc <old_path> <new_path>"
   else
     mv "$1" "$2"
     cd "$2"
   fi
 }
-alias mvc='rename_dir_and_cd '
+alias mvc="rename_dir_and_cd "
+
+# Go to previous PWD
+alias pd="cd $OLDPWD"
 
 # Updirs
-alias {up,..}='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
+alias {up,..}="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 # Development directories
 alias dev="$HOME/Development"
@@ -41,17 +44,18 @@ alias doomdev="$HOME/.config/nvim"
 # }}}
 
 # {{{ Listing
-alias ls='lsd'
-alias la='lsd -A'
-alias ll='lsd -l'
-alias lsa='lsd -lA'
-alias lt='lsd -A --tree --depth=3 -I .git -I node_modules'
+_exa_core_args="--icons --group-directories-first"
+alias ls="exa $_exa_core_args"
+alias la="exa $_exa_core_args --all --ignore-glob=\".git\""
+alias ll="exa $_exa_core_args --long --grid --group --accessed --modified --created --header"
+alias lsa="exa $_exa_core_args --long --grid --group --accessed --modified --created --header --all"
+alias lt="exa $_exa_core_args --all --tree --level=3 --ignore-glob=\".git|.cache|node_modules\""
 # }}}
 
 # {{{ Archives
 function extract() {
   if [[ -z "$1" ]]; then
-    echo 'Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>'
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
   else
     if [[ -f "$1" ]]; then
       case "$1" in
@@ -78,71 +82,88 @@ function extract() {
     fi
   fi
 }
-alias extr='extract '
+alias extr="extract "
 
 function extract_and_remove() {
   extract "$1"
   rm -f "$1"
 }
-alias extrr='extract_and_remove '
+alias extrr="extract_and_remove "
 # }}}
 
 # {{{ Git
 function clone_and_track_all_branches() {
-  git clone "$@"
-  local _repo_dir=$(basename "$1")
-  _repo_dir=${_repo_dir%.*}
-  pushd "$_repo_dir" >/dev/null
-  echo "Tracking all remote branches in '$_repo_dir' ..."
-  for branch in $(git branch --all | grep '^\s*remotes' | egrep --invert-match '(:?HEAD|master|main)$'); do
+  if [[ -z "$1" ]]; then
+    echo "Usage: clone_and_track_all_branches <options> <url> <path>"
+  else
+    git clone "$@"
+    local _repo_dir=$(basename "$1")
+    _repo_dir=${_repo_dir%.*}
+    pushd "$_repo_dir" > /dev/null
+    echo "Tracking all remote branches in '$_repo_dir' ..."
+    for branch in $(git branch --all | grep "^\s*remotes" | egrep --invert-match "(:?HEAD|master|main)$"); do
       git branch --track "${branch##*/}" "$branch"
-  done
-  popd >/dev/null
+    done
+    popd > /dev/null
+  fi
 }
 
-alias gcl='git clone '
-alias gcla='clone_and_track_all_branches '
-alias gst='git status'
-alias {gbra,gb}='git branch '
-alias {gco,go}='git checkout '
-alias {gcob,gob}='git checkout -b '
-alias {gadd,ga}='git add '
-alias {gdff,gd}='git diff '
-alias {gcom,gc}='git commit '
-alias {gpul,gl}='git pull '
-alias {gpus,gp}='git push '
-alias glom='git pull origin main'
-alias ghom='git push origin main'
-alias gg='git grep '
-alias gs='git switch '
-alias gr='git restore '
-alias grs='git restore --staged '
-alias gwa='git worktree add '
-alias gwp='git worktree prune'
+alias gcl="git clone "
+alias gcla="clone_and_track_all_branches "
+alias gst="git status"
+alias {gbra,gb}="git branch "
+alias {gco,go}="git checkout "
+alias {gcob,gob}="git checkout -b "
+alias {gadd,ga}="git add "
+alias {gdff,gd}="git diff "
+alias {gcom,gc}="git commit "
+alias {gpul,gl}="git pull "
+alias {gpus,gp}="git push "
+alias glom="git pull origin main"
+alias ghom="git push origin main"
+alias gg="git grep "
+alias gs="git switch "
+alias gr="git restore "
+alias grs="git restore --staged "
+alias gwa="git worktree add "
+alias gwp="git worktree prune"
 # }}}
 
 # {{{ System
 # Utilities
-alias df='df -h'
-alias du='du -h'
-
-# Make
-# CORES="$(nproc)"
-# JOBS="$(expr $CORES + 1)"
-# alias make="make -j$JOBS"
+alias df="df -h"
+alias du="du -h"
+alias mkdir="mkdir -p "
 
 # Neovim
-alias vi='nvim '
+alias vi="nvim "
+
+# Haskell Stack
+alias ghc="stack ghc"
+alias ghci="stack ghci"
+alias runghc="stack runghc"
+
+### Make and compilers
+CORES="$(nproc)"
+# Use only the half of cores, e.g. 4 cores => 2 jobs
+# this is for limiting the melting of my processor, specially in rustc.
+JOBS="$(expr $CORES / 2)"
+alias make="make -j$JOBS"
+alias cargo="cargo -j $JOBS"
 
 # Wget
 function wget_archive_and_extract() {
-  local -r URL="$1"
-  local -r FILENAME="${URL##*/}"
-  wget "$URL" -O "$FILENAME"
-  extract "$FILENAME"
-  rmi "$FILENAME"
+  if [[ -z "$1" ]]; then
+    echo "Usage: wget_archive_and_extract <url>"
+  else
+    local -r URL="$1"
+    local -r FILENAME="${URL##*/}"
+    wget "$URL" -O "$FILENAME"
+    extract "$FILENAME"
+    rm "$FILENAME"
+  fi
 }
-alias wgetae='wget_archive_and_extract '
+alias wgetae="wget_archive_and_extract "
 
 # }}}
 
@@ -155,9 +176,9 @@ fi
 # }}}
 
 # {{{ theme.sh
-alias th='theme.sh -i'
-alias thl='theme.sh --light -i'
-alias thd='theme.sh --dark -i'
+alias th="theme.sh -i"
+alias thl="theme.sh --light -i"
+alias thd="theme.sh --dark -i"
 # }}}
 
 # vim: fdm=marker ft=bash sw=2 ts=2

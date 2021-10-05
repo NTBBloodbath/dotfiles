@@ -56,7 +56,7 @@ M.plugins = {
         neovim_image_text = "How do I exit Neovim...?",
       })
     end,
-    event = "ColorScheme",
+    event = "BufWinEnter",
   },
   "ptethng/telescope-makefile",
   {
