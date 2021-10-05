@@ -195,6 +195,12 @@ local globalkeys = gears.table.join(
 	    description = 'toggle polybar',
 	    group = 'launcher',
 	}),
+	awful.key({ modkey }, 'c', function()
+	    awful.spawn(string.format('%s/.local/bin/toggle-picom', os.getenv('HOME')))
+	end, {
+	    description = 'toggle picom (compositor)',
+	    group = 'launcher',
+	}),
 
 
 	awful.key({ modkey }, 'l', function()
