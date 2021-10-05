@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+#
+# Picom toggler, meant to be used on my AwesomeWM rice with a keybind
+
+if ! pgrep -x "picom" >/dev/null; then
+    echo "Starting picom ..."
+    picom &
+else
+    echo "Killing picom ..."
+    pkill -SIGKILL picom
+fi

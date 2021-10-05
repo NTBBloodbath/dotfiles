@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+#
+# Polybar toggler, meant to be used on my AwesomeWM rice with a keybind
+
+if ! pgrep -x "polybar" >/dev/null; then
+    echo "Starting polybar ..."
+    $HOME/.config/polybar/launch.sh awesome-top
+else
+    echo "Killing polybar ..."
+    pkill -SIGKILL polybar
+fi
