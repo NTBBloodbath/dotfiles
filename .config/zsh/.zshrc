@@ -83,8 +83,9 @@ setopt hist_save_no_dups
 export LBIN=$HOME/.local/bin
 export EBIN=$HOME/.config/emacs/bin
 export LROCKSBIN=$HOME/.luarocks/bin
+export HSKBIN=$HOME/.stack/programs/x86_64-linux/ghc-tinfo6-8.10.7/bin
 export SUPERMANBIN=$HOME/.local/share/nvim/site/pack/packer/opt/vim-superman/bin
-export PATH=$LBIN:$EBIN:$LROCKSBIN:$SUPERMANBIN:$PATH
+export PATH=$LBIN:$EBIN:$LROCKSBIN:$HSKBIN:$SUPERMANBIN:$PATH
 
 # XDG directories
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
