@@ -12,6 +12,7 @@
 -- the available modules and all their supported flags.
 
 local M = {}
+
 M.source = debug.getinfo(1, "S").source:sub(2)
 
 M.modules = {
@@ -95,4 +96,4 @@ M.modules = {
 
 return M
 
--- vim: sw=2 sts=2 ts=2 noexpandtab
+-- vim: sw=2 sts=2 ts=2 fdm=indent noexpandtab

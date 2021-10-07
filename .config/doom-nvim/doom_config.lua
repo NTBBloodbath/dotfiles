@@ -1,5 +1,3 @@
-local M = {}
-M.source = debug.getinfo(1, "S").source:sub(2)
 -- doom_config - Doom Nvim user configurations file
 --
 -- This file contains the user-defined configurations for Doom nvim and consists
@@ -10,8 +8,11 @@ M.source = debug.getinfo(1, "S").source:sub(2)
 --   2. Nvim, this one defines all the custom configurations that you want to
 --      use in Neovim, e.g. a colorscheme italic_comments global variable
 
+local M = {}
+
+M.source = debug.getinfo(1, "S").source:sub(2)
+
 M.config = {
-  -- {{{ Doom
   doom = {
     -- Autosave
     -- false : Disable autosave
@@ -333,9 +334,9 @@ M.config = {
 
     -- set your custom lsp diagnostic symbols below
     lsp_error = "",
-    lsp_warning = "",
+    lsp_warn = "",
     lsp_hint = "",
-    lsp_information = "",
+    lsp_info = "",
     lsp_virtual_text = " ",
 
     -- Set your linters for the programming languages that you use,
@@ -368,9 +369,7 @@ M.config = {
     -- @default = doom emacs' default dashboard header
     dashboard_custom_header = {},
   },
-  -- }}}
 
-  -- {{{ Nvim
   nvim = {
     -- Set custom Neovim global variables
     -- @default = {}
@@ -451,9 +450,8 @@ M.config = {
     --   }
     options = {},
   },
-  -- }}}
 }
 
 return M
 
--- vim: sw=2 sts=2 ts=2 fdm=marker noexpandtab
+-- vim: sw=2 sts=2 ts=2 fdm=indent noexpandtab
