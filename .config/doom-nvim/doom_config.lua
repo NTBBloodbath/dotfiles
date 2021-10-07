@@ -338,6 +338,23 @@ M.config = {
     lsp_information = "",
     lsp_virtual_text = " ",
 
+    -- Set your linters for the programming languages that you use,
+    -- see https://github.com/mfussenegger/nvim-lint#available-linters
+    linters = {
+      c = { "clangtidy" },
+      cpp = {},
+      css = {},
+      html = { "eslint" },
+      javascript = { "eslint" },
+      lua = { "luacheck" },
+      markdown = {},
+      nix = {},
+      python = {},
+      ruby = {},
+      sh = { "shellcheck" },
+      typescript = { "eslint" },
+    },
+
     -- Set your dashboard custom colors below
     -- @default = doom emacs' default dashboard colors
     dashboard_custom_colors = {
@@ -417,7 +434,14 @@ M.config = {
     --         run_on_start = false,
     --      },
     --   }
-    functions = {},
+    functions = {
+      {
+        pp = function(obj)
+          print(vim.inspect(obj))
+        end,
+        run_on_start = false,
+      },
+    },
 
     -- Set custom options
     -- @default = {}
@@ -432,4 +456,4 @@ M.config = {
 
 return M
 
--- vim: fdm=marker
+-- vim: sw=2 sts=2 ts=2 fdm=marker noexpandtab

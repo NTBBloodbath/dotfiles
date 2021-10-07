@@ -27,10 +27,10 @@ M.modules = {
     "illuminated",        -- Highlight other uses of the word under the cursor like VSC
   },
   doom = {
-    -- "compiler",        -- Compile (and run) your code with just pressing three keys!
+    "compiler",           -- Compile (and run) your code with just pressing three keys!
     "contrib",            -- Special plugins intended for Doom Nvim contributors (lua docs, etc)
     "neorg",              -- Life Organization Tool, used by Doom Nvim user manual
-    -- "runner",          -- Open a REPL for the current language or run the current file
+    "runner",             -- Open a REPL for the current language or run the current file
   },
   editor = {
     "autopairs",          -- Autopairs
@@ -41,12 +41,12 @@ M.modules = {
     "formatter",          -- File formatting
     "gitsigns",           -- Git signs
     "kommentary",         -- Comments plugin
-    -- "linter",          -- Asynchronous linter, see errors in your code on the fly
+    "linter",             -- Asynchronous linter, see errors in your code on the fly
     "lsp",                -- Language Server Protocols
     -- "minimap",         -- Code minimap, requires github.com/wfxr/code-minimap
     -- "ranger",          -- Ranger File Browser, requires ranger file browser
     "snippets",           -- Code snippets
-    "symbols",            -- LSP symbols and tags
+    -- "symbols",         -- LSP symbols and tags
     "telescope",          -- Highly extendable fuzzy finder over lists
     "terminal",           -- Terminal for Neovim (NOTE: needed for runner and compiler)
     "trouble",            -- A pretty list to help you solve all the trouble your code is causing.
@@ -56,9 +56,9 @@ M.modules = {
     -- at the end, e.g. 'rust +lsp'. This will install the rust TreeSitter
     -- parser and rust-analyzer
     --
-    -- "css",             -- CSS support
-    -- "html",            -- HTML support
-    -- "javascript",      -- JavaScript support
+    "css",                -- CSS support
+    "html",               -- HTML support
+    "javascript",         -- JavaScript support
     -- "typescript",      -- TypeScript support
 
     -- "bash",            -- The terminal gods language
@@ -68,7 +68,7 @@ M.modules = {
     -- "ruby",            -- Look ma, I love the gems!
 
     "c",                  -- Core dumped: segmentation fault
-    -- "cpp",             -- C++ support
+    "cpp",                -- C++ support
     -- "go",              -- Hello, gopher
     "haskell +lsp",       -- Because Functional programming is fun, isn't it?
     -- "java",            -- Java support
@@ -80,7 +80,7 @@ M.modules = {
   },
   utilities = {
     -- "lazygit",         -- LazyGit integration for Neovim, requires LazyGit
-    "neogit",             -- Magit for Neovim
+    -- "neogit",          -- Magit for Neovim
     "range-highlight",    -- Hightlights ranges you have entered in commandline
     "suda",               -- Write and read files without sudo permissions
     -- "superman",        -- Read Unix man pages faster than a speeding bullet!
@@ -88,9 +88,11 @@ M.modules = {
   },
   web = {
     "colorizer",          -- Fastest colorizer for Neovim
-    "firenvim",           -- Requires firenvim browser extension; change fontsize by increasing guifontsize in doom_config
+    -- "firenvim",        -- Requires firenvim browser extension; change fontsize by increasing guifontsize in doom_config
     -- "restclient",      -- A fast Neovim http client
   },
 }
 
 return M
+
+-- vim: sw=2 sts=2 ts=2 noexpandtab

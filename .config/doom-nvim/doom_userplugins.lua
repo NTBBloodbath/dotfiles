@@ -36,16 +36,6 @@ M.plugins = {
       }
     end,
   },
-  {
-    "tiagovla/tokyodark.nvim",
-    setup = function()
-      vim.g.tokyodark_transparent_background = false
-      vim.g.tokyodark_enable_italic_comment = false
-      vim.g.tokyodark_enable_italic = false
-      vim.g.tokyodark_color_gamma = "1.0"
-    end,
-  },
-  "tomasiser/vim-code-dark",
   -- Misc & utilities
   {
     "andweeb/presence.nvim",
@@ -64,6 +54,7 @@ M.plugins = {
     run = "cd app && yarn install",
     ft = { "markdown" },
   },
+  -- "cheap-glitch/vim-v",
   {
     "nvim-treesitter/playground",
     after = "nvim-treesitter",
@@ -104,3 +95,5 @@ M.plugins = {
 }
 
 return M
+
+-- vim: sw=2 sts=2 ts=2 noexpandtab
