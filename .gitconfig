@@ -1,0 +1,184 @@
+[user]
+	name = NTBBloodbath
+	email = bloodbathalchemist@protonmail.com
+
+[init]
+	defaultbranch = main
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[commit]
+	gpgsign = true
+	# Show diff when preparing commit message
+	verbose = true
+
+[alias]
+    # Undo latest commit
+    undo = reset --soft HEAD^
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format
+	s = status -s
+
+	# Pull in remote changes for the current repository and all its submodules
+	p = pull --recurse-submodules
+
+	# Clone a repository including all submodules
+	c = clone --recursive
+
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+
+	# Find tags containing commit
+	ft = "!f() { git describe --always --contains $1; }; f"
+	
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+	# List contributors with number of commits.
+	contributors = shortlog --summary --numbered
+	
+	# List aliases
+	aliases = config --get-regexp alias
+
+[ui]
+	color = auto
+
+[core]
+    # Set Neovim as the Git editor
+	editor = nvim
+	whitespace = -trailing-space
+
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
+
+[help]
+	# Automatically correct and execute mistyped commands.
+	autocorrect = 1
+
+[diff]
+	mnemonicPrefix = true
+	renames = true
+	wordRegex = .
+	submodule = log
+
+[fetch]
+    recurseSubmodules = on-demand
+
+[branch]
+	# Show most recently changed branches first.
+	sort = -committerdate
+
+[grep]
+	break = true
+	heading = true
+	lineNumber = true
+	extendedRegexp = true
+
+[log]
+	abbrevCommit = true
+	follow = true
+	decorate = false
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
+[mergetool]
+	keepBackup = false
+	keepTemporaries = false
+	writeToTemp = true
+	prompt = false
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side unobtrusive-line-numbers decorations
+    syntax-theme = "doom-one"
+    navigate = true
+    whitespace-error-style = 22 reverse
+[delta "unobtrusive-line-numbers"]
+    line-numbers = true
+    line-numbers-minus-style = "#ff6c6b"
+    line-numbers-zero-style = "#bbc2cf"
+    line-numbers-plus-style = "#98be65"
+    line-numbers-left-format = "{nm:>4}┊"
+    line-numbers-right-format = "{np:>4}│"
+    line-numbers-left-style = blue
+    line-numbers-right-style = blue
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = yellow box
+
+[push]
+	# https://git-scm.com/docs/git-config#git-config-pushdefault
+	default = simple
+
+	# Make `git push` push relevant annotated tags when pushing branches out.
+	followTags = true
+
+[status]
+	submoduleSummary = true
+	showUntrackedFiles = all
+
+[color "branch"]
+    upstream = cyan
+
+[tag]
+	sort = version:refname
+
+[versionsort]
+  prereleaseSuffix = -pre
+  prereleaseSuffix = .pre
+  prereleaseSuffix = -beta
+  prereleaseSuffix = .beta
+  prereleaseSuffix = -rc
+    prereleaseSuffix = .rc
+
+##### Github specific
+[github]
+	user = NTBBloodbath
+
+# read from given uri
+# push to writable one
+[url "https://github.com/"]
+	insteadOf = "gh:"
+
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "http://github.com/"
+	pushInsteadOf = "gh:"
+
+[credential]
+	helper = "cache --timeout 86400"
+
+[pack]
+	threads = 2
+
+[pull]
+	rebase = true
+
+[maintenance]
+	repo = /home/alejandro/Development/Clang/lcfetch

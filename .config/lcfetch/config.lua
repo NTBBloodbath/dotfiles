@@ -28,7 +28,7 @@ options.enabled_fields = {
   "OS",
   "Kernel",
   "Uptime",
-  -- "Packages",
+  "Packages",
   "",
   "WM",
   "Resolution",

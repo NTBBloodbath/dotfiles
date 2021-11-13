@@ -15,19 +15,19 @@
 ;                                                ;
 ;------------------------------------------------;
 [colors]
-##### doom-one colorscheme #####
-background = #21242a
-background-alt = #3f444a
-foreground = #bbc2cf
+##### doombox colorscheme #####
+background = #2c3136
+background-alt = #3d444b
+foreground = #c7c0b3
 
-black   = #1c1d27
-red     = #ff6c6b
-green   = #98be65
-yellow  = #ECBE7B
-blue    = #51afef
-magenta = #c768dd
-cyan    = #46D9FF
-white   = #efefef
+black   = #868c96
+red     = #f46a66
+green   = #a0ba65
+yellow  = #e2b269
+blue    = #67aec9
+magenta = #cc7fbc
+cyan    = #67c6c0
+white   = #e6dbc5
 
 ##### OneDark colorscheme #####
 black-alt   = #1c1d27
@@ -82,11 +82,12 @@ tray-position = right
 ; Required to display notifications
 enable-ipc = true
 
-modules-left = left-awesome awesome right-awesome pavolume left-cmus cmus right-cmus
+modules-left = left-awesome awesome right-awesome pavolume
+# left-cmus cmus right-cmus
 modules-center = left-date date right-date
 modules-right = system-usb-mount updates left-cpu cpu right-cpu cpu-temp left-memory memory right-memory left-powermenu powermenu right-powermenu
 
-font-0 = "JetBrains Mono:size=7;1"
+font-0 = "Overpass Mono:size=7;2"
 font-1 = "Iosevka Nerd Font Mono:size=12;3"
 
 wm-restack = generic

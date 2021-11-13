@@ -1,4 +1,4 @@
 return {
-	keybinds = require('configuration.keybinds'),
-	apps = require('configuration.apps'),
+  keybinds = require("configuration.keybinds"),
+  apps = require("configuration.apps"),
 }

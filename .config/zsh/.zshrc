@@ -11,10 +11,10 @@ fi
 export ZINIT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/zinit"
 ### Added by Zinit's installer
 if [[ ! -f "$ZINIT_HOME/bin/zinit.zsh" ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$ZINIT_HOME/bin/zinit.zsh" && \
-        command chmod g-rwX "$ZINIT_HOME/bin/zinit.zsh" 
-    command git clone https://github.com/zdharma/zinit "$ZINIT_HOME/bin" && \
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}ZINIT%F{220} Plugins Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$ZINIT_HOME" && \
+        command chmod g-rwX "$ZINIT_HOME" 
+    command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -65,8 +65,8 @@ setopt auto_param_slash
 HISTFILE="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/zsh_history"
 setopt appendhistory notify
 unsetopt beep nomatch
-# Treat the '!' character specially during expansion
-setopt bang_hist
+# Do not treat the '!' character specially during expansion
+setopt no_bang_hist
 # Write to the history file immediately, not when the shell exits
 setopt inc_append_history
 # Delete an old recorded event if a new event is a duplicate
@@ -75,17 +75,25 @@ setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 # Don't write a duplicate event to the history file
 setopt hist_save_no_dups
+# Add timestamps to history
+setopt extended_history
+# Share history between sessions
+setopt share_history
 # }}}
 # }}}
 
 # {{{ User configurations
 # Export custom PATH
-export LBIN=$HOME/.local/bin
-export EBIN=$HOME/.config/emacs/bin
-export LROCKSBIN=$HOME/.luarocks/bin
-export HSKBIN=$HOME/.stack/programs/x86_64-linux/ghc-tinfo6-8.10.7/bin
-export SUPERMANBIN=$HOME/.local/share/nvim/site/pack/packer/opt/vim-superman/bin
-export PATH=$LBIN:$EBIN:$LROCKSBIN:$HSKBIN:$SUPERMANBIN:$PATH
+export PATH=$HOME/.local/bin:$PATH
+if [[ -d "$HOME/.config/emacs/bin" ]]; then
+  export PATH=$HOME/.config/emacs/bin:$PATH
+fi
+if [[ -d "$HOME/.luarocks/bin" ]]; then
+  export PATH=$HOME/.luarocks/bin:$PATH
+fi
+if [[ -d "$HOME/.stack/programs/x86_64-linux" ]]; then
+  export PATH=$HOME/.stack/programs/x86_64-linux/ghc-tinfo6-8.10.7/bin:$PATH
+fi
 
 # XDG directories
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
@@ -113,15 +121,22 @@ export MANPAGER="nvim +Man!"
 # fi
 
 # {{{ Blur kitty terminal
-if [[ $(ps --no-header -p $PPID -o comm) =~ '^kitty$' ]]; then
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  if [[ $(ps --no-header -p $PPID -o comm) =~ '^kitty$' ]]; then
     for wid in $(xdotool search --pid $PPID); do
-        xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid;
+      xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid;
     done
+  fi
 fi
 # }}}
 # }}}
 
 # {{{ Plugins & themes
+
+# {{{ Snippets
+zinit ice wait lucid
+zinit snippet $XDG_CONFIG_HOME/zsh/aliases
+# }}}
 
 # {{{ p10k theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -151,7 +166,7 @@ zinit wait lucid light-mode for \
       ZINIT[COMPINIT_OPTS]=-C;
       zicompinit; zicdreplay;
     ' \
-      zdharma/fast-syntax-highlighting \
+      zdharma-continuum/fast-syntax-highlighting \
     atload'!_zsh_autosuggest_start' \
       zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' \
@@ -174,13 +189,8 @@ zinit wait lucid light-mode for \
       zstyle :history-search-multi-word highlight-color fg=blue,bold
       zstyle :plugin:history-search-multi-word reset-prompt-protect 1
     ' \
-      zdharma/history-search-multi-word \
+      zdharma-continuum/history-search-multi-word \
     hlissner/zsh-autopair
-# }}}
-
-# {{{ Snippets
-zinit ice wait lucid
-zinit snippet $XDG_CONFIG_HOME/zsh/aliases
 # }}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

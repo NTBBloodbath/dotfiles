@@ -20,7 +20,7 @@ rofi.show-icons: true
 */
 
 ! Change DPI, 1360x768 = 91.87
-Xft.dpi: 85
+Xft.dpi: 80
 
 ! Set cursor theme
 Xcursor.theme: Bibata-Modern-Ice

@@ -32,7 +32,13 @@ M.config = {
     -- @default = false
     disable_macros = false,
 
-    -- Autosave sessions
+    -- Enable folding
+    -- true : fold is enabled
+    -- false : fold is disabled
+    -- @default = true
+    foldenable = true,
+
+		-- Autosave sessions
     -- false : Disable session autosave
     -- true  : Enable session autosave
     -- @default = false
@@ -144,6 +150,12 @@ M.config = {
     expand_tabs = true,
 
     -- Set numbering
+    -- false : Disable number lines
+    -- true  : Enable  number lines
+    -- @default = true
+    enable_numbering = true,
+
+    -- Set numbering style
     -- false : Shows absolute number lines
     -- true  : Shows relative number lines
     -- @default = true
@@ -211,6 +223,10 @@ M.config = {
       -- Completion and snippets keybindings
       completion = true,
     },
+
+    -- sequences used for escaping insert mode
+    -- @default = { 'jk', 'kj' }
+    escape_sequences = { "jk", "kj" },
 
     -- Disable or enable Doom autocommands, this can break some configuration options (they will stop working)
     -- e.g. preserve_edit_pos or autosave
@@ -300,7 +316,7 @@ M.config = {
 
     -- Default colorscheme
     -- @default = doom-one
-    colorscheme = "doom-one",
+    colorscheme = "doombox",
 
     -- Background color
     -- @default = dark
@@ -332,8 +348,8 @@ M.config = {
     -- Set gui fonts here
     -- @default = "FiraCode Nerd Font", @default font size = 15,
     -- WARNING: Font sizes must be in string format!
-    guifont = "FiraCode Nerd Font",
-    guifont_size = "8",
+    guifont = "JetBrainsMono Nerd Font",
+    guifont_size = "12",
 
     -- change Which Key background color
     -- can use hex, or normal color names (eg: Red, Gree, Blue)

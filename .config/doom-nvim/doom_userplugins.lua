@@ -18,6 +18,7 @@ M.source = debug.getinfo(1, "S").source:sub(2)
 
 M.plugins = {
   -- Colorschemes
+  "/home/alejandro/Development/Nvim/doombox.nvim",
   {
     "eddyekofo94/gruvbox-flat.nvim",
     config = function()
@@ -47,7 +48,7 @@ M.plugins = {
         neovim_image_text = "How do I exit Neovim...?",
       })
     end,
-    event = "BufWinEnter",
+    event = "ColorScheme",
   },
   "ptethng/telescope-makefile",
   {

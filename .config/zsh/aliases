@@ -130,7 +130,7 @@ alias gwp="git worktree prune"
 # }}}
 
 # {{{ System
-# Utilities
+### Utilities
 alias df="df -h"
 alias du="du -h"
 alias mkdir="mkdir -p "
@@ -142,6 +142,15 @@ alias vi="nvim "
 alias ghc="stack ghc"
 alias ghci="stack ghci"
 alias runghc="stack runghc"
+
+# Enable aliases to be sudo’ed
+alias sudo="sudo "
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
 
 ### Make and compilers
 CORES="$(nproc)"

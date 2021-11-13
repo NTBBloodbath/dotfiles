@@ -18,7 +18,7 @@ M.source = debug.getinfo(1, "S").source:sub(2)
 M.modules = {
   ui = {
     "dashboard",          -- Start screen
-    -- "doom-themes",     -- Additional doom emacs' colorschemes
+    "doom-themes",        -- Additional doom emacs' colorschemes
     "indentlines",        -- Show indent lines
     -- "show_registers",  -- popup that shows register contents
     "statusline",         -- Statusline
@@ -69,11 +69,11 @@ M.modules = {
     -- "ruby",            -- Look ma, I love the gems!
 
     "c",                  -- Core dumped: segmentation fault
-    "cpp",                -- C++ support
+    -- "cpp",             -- C++ support
     -- "go",              -- Hello, gopher
-    "haskell +lsp",       -- Because Functional programming is fun, isn't it?
+    "haskell",            -- Because Functional programming is fun, isn't it?
     -- "java",            -- Java support
-    -- "rust +lsp",       -- Let's get rusty!
+    "rust +lsp",          -- Let's get rusty!
 
     "comment",            -- Better annotations and comments
     "config",             -- Configuration files (JSON, YAML, TOML)
