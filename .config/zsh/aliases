@@ -155,10 +155,10 @@ alias path='echo -e ${PATH//:/\\n}'
 ### Make and compilers
 CORES="$(nproc)"
 # Use only the half of cores, e.g. 4 cores => 2 jobs
-# this is for limiting the melting of my processor, specially in rustc.
+# this is for limiting the melting of my processor, specially with rustc.
 JOBS="$(expr $CORES / 2)"
 alias make="make -j$JOBS"
-alias cargo="cargo -j $JOBS"
+alias cargob="cargo build -j $JOBS"
 
 # Wget
 function wget_archive_and_extract() {

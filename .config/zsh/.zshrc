@@ -114,6 +114,9 @@ export MANPAGER="nvim +Man!"
 # Start lenv (Lua version manager)
 [[ ! -f $HOME/.lenvrc ]] || source $HOME/.lenvrc
 
+# Load XMake profile
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile"
+
 # Load the most recently selected theme automatically (using theme.sh)
 # if command -v theme.sh > /dev/null; then
 # 	export THEME_HISTFILE=~/.theme_history
