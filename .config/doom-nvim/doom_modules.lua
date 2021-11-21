@@ -90,7 +90,7 @@ M.modules = {
   web = {
     "colorizer",          -- Fastest colorizer for Neovim
     -- "firenvim",        -- Requires firenvim browser extension; change fontsize by increasing guifontsize in doom_config
-    -- "restclient",      -- A fast Neovim http client
+    "restclient",         -- A fast Neovim http client
   },
 }
 

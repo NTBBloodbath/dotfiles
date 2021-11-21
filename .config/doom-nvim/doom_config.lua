@@ -150,10 +150,10 @@ M.config = {
     expand_tabs = true,
 
     -- Set numbering
-    -- false : Disable number lines
-    -- true  : Enable  number lines
-    -- @default = true
-    enable_numbering = true,
+    -- false : Enable  number lines
+    -- true  : Disable number lines
+    -- @default = false
+    disable_numbering = false,
 
     -- Set numbering style
     -- false : Shows absolute number lines
@@ -312,7 +312,7 @@ M.config = {
     -- We don'recommend you put this outside of neovim so we've restricted to the path: ~/.config/nvim
     -- WARNING: only put the folder name that you want. (eg: undo_dir = '/undodir')
     -- @default_directory = '~/.config/nvim/undodir'
-    undo_dir = "/undodir",
+    undo_dir = "/undo",
 
     -- Default colorscheme
     -- @default = doom-one
@@ -434,6 +434,7 @@ M.config = {
     mappings = {
       { "v", "p", '"_dP', { noremap = true } },
       { "n", "ww", "<cmd>w<CR>", { noremap = true, silent = true } },
+      { "n", ";", ":", { noremap = true } },
     },
 
     -- Set custom commands
