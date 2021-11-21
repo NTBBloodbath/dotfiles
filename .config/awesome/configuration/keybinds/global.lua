@@ -175,9 +175,9 @@ local globalkeys = gears.table.join(
     group = "launcher",
   }),
   awful.key({ altkey }, "e", function()
-    awful.spawn("codium")
+    awful.spawn("emacsclient -c -a 'emacs'")
   end, {
-    description = "open VSCodium",
+    description = "open Emacs",
     group = "launcher",
   }),
   awful.key({ modkey }, "p", function()
@@ -190,6 +190,18 @@ local globalkeys = gears.table.join(
     awful.spawn(string.format("%s/.local/bin/toggle-picom", os.getenv("HOME")))
   end, {
     description = "toggle picom (compositor)",
+    group = "launcher",
+  }),
+  awful.key({ modkey }, "r", function()
+    awful.spawn(string.format("%s/.local/bin/toggle-kb-layout", os.getenv("HOME")))
+  end, {
+    description = "toggle keyboard layout (alternate between ES and US)",
+    group = "launcher",
+  }),
+  awful.key({ modkey }, "b", function()
+      awful.spawn(string.format("%s/.local/bin/toggle-kb-rgb", os.getenv("HOME")))
+  end, {
+    description = "Toggle Keyboard RGB",
     group = "launcher",
   }),
 

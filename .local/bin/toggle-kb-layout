@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+#
+# Keyboard layout toggler (alternate between ES and EN), meant to be used on my AwesomeWM rice with a keybind
+
+change_layout() {
+    local _current_layout="$(setxkbmap -query | grep "layout" | awk '{ print $2 }')"
+    if [[ "$_current_layout" == "es" || "$_current_layout" == "latam" ]]; then
+        # Set english layout
+        setxkbmap us
+    else
+        # Set spanish layout
+        setxkbmap es
+    fi
+}
+
+change_layout
