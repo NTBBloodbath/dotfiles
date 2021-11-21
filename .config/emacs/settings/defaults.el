@@ -3,6 +3,8 @@
 ;; Author:  NTBBloodbath <bloodbathalchemist@protonmail.com>
 ;; URL:     https://github.com/NTBBloodbath/bloodymacs
 ;; License: MIT
+;;
+;;; Code:
 
 ;; UTF-8 please
 (setq locale-coding-system 'utf-8) ; pretty
@@ -97,3 +99,5 @@
 (setq electric-indent-mode 1)
 
 (provide 'defaults)
+
+;;; defaults.el ends here
