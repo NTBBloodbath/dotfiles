@@ -14,6 +14,10 @@ M.source = debug.getinfo(1, "S").source:sub(2)
 
 M.config = {
   doom = {
+  	-- Pins plugins to a commit sha to prevent breaking changes
+  	-- @default = true
+  	freeze_dependencies = true,
+
     -- Autosave
     -- false : Disable autosave
     -- true  : Enable autosave
@@ -32,9 +36,15 @@ M.config = {
     -- @default = false
     disable_macros = false,
 
+    -- Use netrw as files explorer
+    -- false : Use nvim-tree.lua
+    -- true  : Use netrw
+    -- @default = false
+    usse_netrw = false,
+
     -- Enable folding
-    -- true : fold is enabled
     -- false : fold is disabled
+    -- true  : fold is enabled
     -- @default = true
     foldenable = true,
 
@@ -115,8 +125,8 @@ M.config = {
     line_highlight = true,
 
     -- Automatically split right
-    -- false : splits right (vertically)
-    -- true  : splits left (vertically)
+    -- false : splits left  (vertically)
+    -- true  : splits right (vertically)
     -- @default = true
     split_right = true,
 
@@ -316,7 +326,7 @@ M.config = {
 
     -- Default colorscheme
     -- @default = doom-one
-    colorscheme = "doombox",
+    colorscheme = "doom-one",
 
     -- Background color
     -- @default = dark
@@ -351,12 +361,12 @@ M.config = {
     guifont = "JetBrainsMono Nerd Font",
     guifont_size = "12",
 
-    -- change Which Key background color
+    -- Change Which Key background color
     -- can use hex, or normal color names (eg: Red, Gree, Blue)
     -- @default = #202328
     whichkey_bg = "#202328",
 
-    -- set your custom lsp diagnostic symbols below
+    -- Set your custom lsp diagnostic symbols below
     lsp_error = "",
     lsp_warn = "",
     lsp_hint = "",
