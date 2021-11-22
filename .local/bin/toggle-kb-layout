@@ -7,7 +7,7 @@ change_layout() {
     if [[ "$_current_layout" == "es" || "$_current_layout" == "latam" ]]; then
         # Set english layout
         setxkbmap us
-    elsea
+    else
         # Set spanish layout
         setxkbmap latam
     fi
