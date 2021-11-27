@@ -15,7 +15,7 @@ local walls_dir = string.format("%s/wallpapers", os.getenv("XDG_DATA_HOME"))
 theme.icon_theme = "Tela-circle-dark"
 
 theme.font = "Overpass 10"
-theme.wallpaper = string.format("%s/fractal-tnz.png", walls_dir)
+theme.wallpaper = string.format("%s/doombox_breakingbad.png", walls_dir)
 
 theme.bg_normal = "#22262a"
 theme.bg_focus = "#3E4556"

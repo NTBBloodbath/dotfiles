@@ -92,6 +92,12 @@ alias extrr="extract_and_remove "
 # }}}
 
 # {{{ Git
+function track_all_branches() {
+  for branch in $(git branch --all | grep "^\s*remotes" | egrep --invert-match "(:?HEAD|master|main)$"); do
+    git branch --track "${branch##*/}" "$branch"
+  done
+}
+
 function clone_and_track_all_branches() {
   if [[ -z "$1" ]]; then
     echo "Usage: clone_and_track_all_branches <options> <url> <path>"
@@ -101,15 +107,14 @@ function clone_and_track_all_branches() {
     _repo_dir=${_repo_dir%.*}
     pushd "$_repo_dir" > /dev/null
     echo "Tracking all remote branches in '$_repo_dir' ..."
-    for branch in $(git branch --all | grep "^\s*remotes" | egrep --invert-match "(:?HEAD|master|main)$"); do
-      git branch --track "${branch##*/}" "$branch"
-    done
+    track_all_branches
     popd > /dev/null
   fi
 }
 
 alias gcl="git clone "
 alias gcla="clone_and_track_all_branches "
+alias gtb="track_all_branches"
 alias gst="git status"
 alias {gbra,gb}="git branch "
 alias {gco,go}="git checkout "
