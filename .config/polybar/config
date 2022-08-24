@@ -15,29 +15,57 @@
 ;                                                ;
 ;------------------------------------------------;
 [colors]
-##### doombox colorscheme #####
-background = #2c3136
-background-alt = #3d444b
-foreground = #c7c0b3
+##### doom-one colorscheme ####
+background     = #21242b
+background-alt = #30343e
+foreground     = #bbc2cf
 
-black   = #868c96
-red     = #f46a66
-green   = #a0ba65
-yellow  = #e2b269
-blue    = #67aec9
-magenta = #cc7fbc
-cyan    = #67c6c0
-white   = #e6dbc5
+black   = #1b1e24
+red     = #ff6c6b
+green   = #98be65
+yellow  = #ecbe7e
+blue    = #51afef
+magenta = #c678dd
+cyan    = #46d9ff
+white   = #fafcfa
+
+#####  coffy colorscheme  #####
+# background     = #282c34
+# background-alt = #3d444b
+# foreground     = #fafcfa
+#
+# black   = #3e4556
+# red     = #fc8b9a
+# green   = #bbfab1
+# yellow  = #ffe896
+# blue    = #96ecff
+# magenta = #c9b1fc
+# cyan    = #acf9ea
+# white   = #fafcfa
+
+##### doombox colorscheme #####
+# background = #2c3136
+# background-alt = #3d444b
+# foreground = #c7c0b3
+#
+# black   = #868c96
+# red     = #f46a66
+# green   = #a0ba65
+# yellow  = #e2b269
+# blue    = #67aec9
+# magenta = #cc7fbc
+# cyan    = #67c6c0
+# white   = #e6dbc5
 
 ##### OneDark colorscheme #####
-black-alt   = #1c1d27
-red-alt     = #e06c75
-green-alt   = #98c379
-yellow-alt  = #e5c07b
-blue-alt    = #61afef
-magenta-alt = #c678dd
-cyan-alt    = #56b6c2
-white-alt   = #c8ccd4
+# black-alt   = #1c1d27
+# red-alt     = #e06c75
+# green-alt   = #98c379
+# yellow-alt  = #e5c07b
+# blue-alt    = #61afef
+# magenta-alt = #c678dd
+# cyan-alt    = #56b6c2
+# white-alt   = #c8ccd4
 
 ;------------------------------------------------;
 
@@ -51,7 +79,7 @@ margin-bottom = 0
 ;                                                ;
 ;------------------------------------------------;
 
-[bar/awesome-top]
+[bar/top]
 width = 100%
 height = 20
 offset-x = 0%
@@ -82,166 +110,63 @@ tray-position = right
 ; Required to display notifications
 enable-ipc = true
 
-modules-left = left-awesome awesome right-awesome pavolume
+modules-left = workspaces pavolume
 # left-cmus cmus right-cmus
-modules-center = left-date date right-date
-modules-right = system-usb-mount updates left-cpu cpu right-cpu cpu-temp left-memory memory right-memory left-powermenu powermenu right-powermenu
+modules-center = date
+modules-right = cpu memory cpu-temp left-powermenu powermenu right-powermenu
+# system-usb-mount updates
 
-font-0 = "Overpass Mono:size=7;2"
-font-1 = "Iosevka Nerd Font Mono:size=12;3"
+font-0 = "Iosevka NTB:size=10;2"
+font-1 = "Symbols Nerd Font Mono:size=8;2"
 
 wm-restack = generic
 
-[bar/awesome-bottom-left]
-width = 19%
-height = 20
-offset-x = 0.5%
-offset-y = 1%
-radius = 10.0
-fixed-center = true
-
-monitor = default
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = ${colors.red}
-
-border-size = 4
-border-color = ${colors.background}
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-bottom = true
-
-modules-left = memory right-memory
-modules-right = left-cpu cpu
-
-font-0 = "Roboto:size=8;2"
-font-1 = "Iosevka Nerd Font Mono:size=12;3"
-
-[bar/awesome-bottom-center]
-width = 35%
-height = 20
-offset-x = 32%
-offset-y = 1%
-fixed-center = true
-
-monitor = default
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = ${colors.red}
-
-border-size = 4
-border-color = ${colors.background}
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-bottom = true
-
-modules-center = cmus
-
-font-0 = "Roboto:size=8;2"
-font-1 = "Iosevka Nerd Font Mono:size=14;4"
-
-[bar/awesome-bottom-right]
-width = 18.5%
-height = 20
-offset-x = 81%
-offset-y = 1%
-fixed-center = true
-
-monitor = default
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = ${colors.red}
-
-border-size = 4
-border-color = ${colors.background}
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-bottom = true
-
-modules-center = github
-
-font-0 = "Roboto:size=8;2"
-font-1 = "Iosevka Nerd Font Mono:size=16;3"
 
 ;------------------------------------------------;
 ;                                                ;
 ;               XWORKSPACES PAMETERS             ;
 ;                                                ;
 ;------------------------------------------------;
-[module/awesome]
+[module/workspaces]
 type = internal/xworkspaces
 
 pin-workspaces = false
 
 enable-click = true
 enable-scroll = true
+reverse-scroll = true
 
 icon-0 = 1;
 icon-1 = 2;
 icon-2 = 3;
-icon-3 = 4;
-icon-4 = 5;
-icon-default = 
+# icon-3 = 4;
+# icon-4 = 5;
+icon-default =  
 
 format = <label-state>
 
 label-monitor = %name%
 
-label-active = 
+label-active =  
 label-active-background = ${colors.background-alt}
 label-active-foreground = ${colors.red}
 label-active-padding = 1
 
-label-occupied = 
+label-occupied =  
 label-occupied-background = ${colors.background-alt}
 label-occupied-foreground = ${colors.foreground}
 label-occupied-padding = 1
 
-label-urgent = 
+label-urgent =  
 label-urgent-background = ${colors.background-alt}
 label-urgent-foreground = ${colors.red}
 label-urgent-padding = 1
 
-label-empty = 
+label-empty =  
 label-empty-background = ${colors.background-alt}
 label-empty-foreground = ${colors.white}
 label-empty-padding = 1
 
-[module/updates]
-type = custom/script
-exec = dnf updateinfo -q --list | wc -l
-format = <label>
-interval = 3600 
-label = %output% updates
-label-padding = 1
-format-prefix = " "
-format-prefix-foreground = ${colors.red}
-format-foreground = ${colors.foreground}     
-format-background = ${colors.background}
 
 ;------------------------------------------------;
 ;                                                ;
@@ -252,12 +177,12 @@ format-background = ${colors.background}
 type = internal/date
 interval = 60
 date =
-time = %I:%M %p
+time = "%I:%M %p "
 
 ; if `date-alt` or `time-alt` is defined, clicking
 ; the module will toggle between formats
-date-alt = %A, %d %B %Y
-time-alt = %r
+date-alt = " %A, %d %B %Y"
+time-alt = "%r "
 
 format = <label>
 format-background = ${colors.background-alt}
@@ -307,18 +232,13 @@ menu-0-2-exec = awesome quit
 ;                                                ;
 ;------------------------------------------------;
 [module/memory]
-type = internal/memory
+type = custom/script
 interval = 2
-
-format = <label>
-format-prefix = "﬙ "
-format-prefix-foreground = ${colors.background}
-format-background = ${colors.yellow}
-format-foreground = ${colors.background}
-
-label = %percentage_used%%
-label-background = ${colors.yellow}
-label-foreground = ${colors.background}
+label=%output%
+label-padding = 2
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+exec = ~/.config/polybar/scripts/mem-usage.sh
 
 ;------------------------------------------------;
 ;                                                ;
@@ -326,18 +246,31 @@ label-foreground = ${colors.background}
 ;                                                ;
 ;------------------------------------------------;
 [module/cpu]
-type = internal/cpu
-interval = 2
+type = custom/script
+interval = 1
+label=%output%
+label-padding = 2
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+exec = ~/.config/polybar/scripts/cpu-usage.sh
 
-format = <label>
-format-prefix = ""
-format-background = ${colors.blue}
-format-foreground = ${colors.background}
-
-label = %percentage%%
-label-padding = 1
-label-background = ${colors.blue}
-label-foreground = ${colors.background}
+;------------------------------------------------;
+;                                                ;
+;               VOLUME PARAMETERS                ;
+;                                                ;
+;------------------------------------------------;
+[module/pavolume]
+type = custom/script
+interval = 0.5
+label=%output%
+label-padding = 2
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+exec = ~/.config/polybar/scripts/pavolume.sh
+click-right = exec pavucontrol
+click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
+scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
 
 ;------------------------------------------------;
 ;                                                ;
@@ -357,24 +290,6 @@ api-url = https://api.github.com/
 
 label =   Notifications: %notifications%
 label-offline =   Offline
-
-;------------------------------------------------;
-;                                                ;
-;               VOLUME PARAMETERS                ;
-;                                                ;
-;------------------------------------------------;
-[module/pavolume]
-type = custom/script
-interval = 0.5
-label=%output%
-label-padding = 2
-label-background = ${colors.background}
-label-foreground = ${colors.foreground}
-exec = ~/.config/polybar/scripts/pavolume.sh
-click-right = exec pavucontrol
-click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
-scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
-scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
 
 ;------------- USER DEFINED MODULES --------------
 ; These modules require scripts to run, you can find
@@ -521,11 +436,24 @@ content-foreground = ${module/powermenu.label-open-background}
 ;            U N U S E D  M O D U L E S         ;
 ;                                               ;
 ;-----------------------------------------------;
-   ;-----------------------------------------;
-   ;                                         ;
-   ;           NET MODULE PARAMETERS         ;
-   ;                                         ;
-   ;-----------------------------------------;
+
+[module/updates]
+type = custom/script
+exec = dnf updateinfo -q --list | wc -l
+format = <label>
+interval = 3600 
+label = %output% updates
+label-padding = 1
+format-prefix = " "
+format-prefix-foreground = ${colors.red}
+format-foreground = ${colors.foreground}     
+format-background = ${colors.background}
+
+;-----------------------------------------;
+;                                         ;
+;           NET MODULE PARAMETERS         ;
+;                                         ;
+;-----------------------------------------;
 [module/wlan]
 type = internal/network
 interface = wlp3s1

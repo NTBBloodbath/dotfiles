@@ -6,8 +6,9 @@ get_cpu_temp() {
     local temp_status="${temp_emotes[0]}"
 
     for temp in $(sensors | grep Core | awk '{print substr($3, 2, length($3)-5)}' | tr "\\n" " "); do
-        average="$(( average + temp / $(nproc) ))"
+        average="$(( average + temp ))"
     done
+    average="$(( average / $(nproc) ))"
  
 	if [[ "$average" -gt 40 && "$average" -lt 65 ]]; then
 		temp_status="${temp_emotes[1]}"

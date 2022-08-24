@@ -11,7 +11,7 @@ if [[ "$#" -gt 0 ]]; then
     _polybar_config_file="$HOME/.config/polybar/config"
     # Launch bars
     if [[ ! "$#" -gt 1 ]]; then
-        polybar --log=error "$1" &
+        ~/.local/bin/polybar --log=error "$1" &
     else
         for _bar in "$@"; do
             # Check if the bar exists so we can raise an error

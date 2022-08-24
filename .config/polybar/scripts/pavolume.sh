@@ -2,7 +2,7 @@
 
 # finds the active sink for pulseaudio and increments the volume. useful when you have multiple audio outputs and have a key bound to vol-up and down
 
-osd='no'
+osd='yes'
 inc='5'
 capvol='no'
 maxvol='100'
@@ -45,7 +45,7 @@ function volUp {
 
     if [ ${osd} = 'yes' ]
     then
-        qdbus-qt5 org.kde.kded5 /modules/kosd showVolume "$curVol" 0
+        dunstify "Volume: " -h int:value:$curVol
     fi
 
     if [ ${autosync} = 'yes' ]
@@ -61,7 +61,7 @@ function volDown {
 
     if [ ${osd} = 'yes' ]
     then
-        qdbus-qt5 org.kde.kded5 /modules/kosd showVolume "$curVol" 0
+        dunstify "Volume:" -h int:value:$curVol
     fi
 
     if [ ${autosync} = 'yes' ]
@@ -72,7 +72,7 @@ function volDown {
 }
 
 function getSinkInputs {
-    input_array=$(pactl list sinks | grep -A 15 "Estado: RUNNING" | grep -B 4 "Nombre: $1 " | awk '/Nombre/{ print $2 }')
+    input_array=$(pactl list sinks | grep -A 15 "State: RUNNING" | grep -B 4 "Name: $1 " | awk '/Name/{ print $2 }')
     echo "${input_array[@]}"
 }
 
@@ -87,7 +87,7 @@ function volSync {
 }
 
 function getCurVol {
-    curVol=$(pactl list sinks | grep -A 15 'Nombre: '"$active_sink"'' | grep 'Volumen:' | grep -E -v 'Volumen base:' | awk -F : '{print $3}' | grep -o -P '.{0,3}%' | sed s/.$// | tr -d ' ')
+    curVol=$(pactl list sinks | grep -A 15 'Name: '"$active_sink"'' | grep 'Volume:' | grep -E -v 'Base Volume:' | awk -F : '{print $3}' | grep -o -P '.{0,3}%' | sed s/.$// | tr -d ' ')
 }
 
 function volMute {
@@ -113,7 +113,7 @@ function volMute {
 }
 
 function volMuteStatus {
-    curStatus=$(pactl list sinks | grep -A 15 "Estado: RUNNING" | grep -A 15 "Nombre: $active_sink" | awk '/Silencio/{ print $2 }')
+    curStatus=$(pactl list sinks | grep -A 15 "State: RUNNING" | grep -A 15 "Name: $active_sink" | awk '/Mute/{ print $2 }')
 }
 
 # Prints output for bar
@@ -152,19 +152,27 @@ function output() {
     volMuteStatus
 
     # Set volume bar
-    local percentage=$(( curVol/10 ))
+    local percentage=$(( curVol / 10 ))
     local percentage_bars="%{F#98be65}"
-    for ((i = 1 ; i < 10 ; i++))
-    do
-        if [ "$i" = "$percentage" ]
-        then
-            percentage_bars+="%{F-}%{F#5B6268}"
-        fi
-        percentage_bars+="━"
-    done
+    if [ "$percentage" -eq 0 ]
+    then
+        percentage_bars+="%{F-}%{F#5B6268}──────────"
+    elif [ "$percentage" -eq 1 ]
+    then
+        percentage_bars+="─%{F-}%{F#5B6268}─────────"
+    else
+        for ((i = 1 ; i <= 10 ; i++))
+        do
+            percentage_bars+="─"
+            if [ "$i" = "$percentage" ]
+            then
+                percentage_bars+="%{F-}%{F#5B6268}"
+            fi
+        done
+    fi
     percentage_bars+="%{F-}"
 
-    if [ "${curStatus}" = 'sí' ]
+    if [ "${curStatus}" = 'yes' ]
     then
         echo "婢 $percentage_bars %{F#bbc2cf}$curVol%%{F-}"
     else
@@ -182,7 +190,7 @@ case "$1" in
         ;;
     --togmute)
         volMuteStatus
-        if [ "$curStatus" = 'sí' ]
+        if [ "$curStatus" = 'yes' ]
         then
             volMute unmute
         else
