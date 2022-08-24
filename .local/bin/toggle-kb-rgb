@@ -5,10 +5,10 @@
 
 if [[ ! -f "/tmp/kb_rgb_enabled" ]]; then
     # Enable RGB
-    xset led named "Scroll Lock"
+    distrobox-enter --name env -- 'xset led named "Scroll Lock"'
     touch /tmp/kb_rgb_enabled
 else
     # Disable RGB
-    xset -led named "Scroll Lock"
+    distrobox-enter --name env -- 'xset -led named "Scroll Lock"'
     rm /tmp/kb_rgb_enabled
 fi

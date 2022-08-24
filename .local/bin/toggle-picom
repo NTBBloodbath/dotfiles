@@ -4,7 +4,7 @@
 
 if ! pgrep -x "picom" >/dev/null; then
     echo "Starting picom ..."
-    picom &
+    distrobox-enter --name env -- picom &
 else
     echo "Killing picom ..."
     pkill -SIGKILL picom
