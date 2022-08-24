@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # {{{ Directories
 # Utilities
 function create_dir_and_cd() {
@@ -31,25 +33,39 @@ alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
 # Development directories
-alias dev="$HOME/Development"
-alias cdev="$HOME/Development/Clang"
-alias vdev="$HOME/Development/Vlang"
-alias pydev="$HOME/Development/Python"
-alias nodev="$HOME/Development/Node"
-alias hskdev="$HOME/Development/Haskell"
-alias miscdev="$HOME/Development/Misc"
-alias rustdev="$HOME/Development/Rust"
-alias nvimdev="$HOME/Development/Nvim"
-alias doomdev="$HOME/.config/nvim"
+__devdir="$HOME/Development"
+[[ -d "$__devdir" ]] && alias dev="$__devdir"
+[[ -d "$__devdir/Clang" ]] && alias cdev="$__devdir/Clang"
+[[ -d "$__devdir/Elixir" ]] && alias edev="$__devdir/Elixir"
+[[ -d "$__devdir/Python" ]] && alias pydev="$__devdir/Python"
+[[ -d "$__devdir/Node" ]] && alias nodev="$__devdir/Node"
+[[ -d "$__devdir/Haskell" ]] && alias hskdev="$__devdir/Haskell"
+[[ -d "$__devdir/Misc" ]] && alias miscdev="$__devdir/Misc"
+[[ -d "$__devdir/Rust" ]] && alias rustdev="$__devdir/Rust"
+[[ -d "$__devdir/Nvim" ]] && alias nvimdev="$__devdir/Nvim"
+[[ -d "$__devdir/Zig" ]] && alias zdev="$__devdir/Zig"
 # }}}
 
 # {{{ Listing
-_exa_core_args="--icons --group-directories-first"
-alias ls="exa $_exa_core_args"
-alias la="exa $_exa_core_args --all --ignore-glob=\".git\""
-alias ll="exa $_exa_core_args --long --grid --group --accessed --modified --created --header"
-alias lsa="exa $_exa_core_args --long --grid --group --accessed --modified --created --header --all"
-alias lt="exa $_exa_core_args --all --tree --level=3 --ignore-glob=\".git|.cache|node_modules\""
+if [[ -x "$(command -v exa)" ]]; then
+  _exa_core_args="exa --icons --group-directories-first"
+  alias ls="$_exa_core_args"
+  alias la="$_exa_core_args --all --ignore-glob=\".git\""
+  alias ll="$_exa_core_args --long --grid --group --accessed --modified --created --header"
+  alias lsa="$_exa_core_args --long --grid --group --accessed --modified --created --header --all"
+  alias lt="$_exa_core_args --all --tree --level=3 --ignore-glob=\".git|.cache|node_modules\""
+else
+  # -v          : natural sort of (version) numbers within text
+  # -p          : append '/' indicator to directories
+  # -N          : print entry names without quoting
+  # --file-type : append special indicators based on filetpe (exluding '*' for binaries/executables)
+  _ls_core_args="ls --color=auto -vpN --file-type --group-directories-first"
+  alias ls="$_ls_core_args"
+  alias la="$_ls_core_args --almost-all -I \".git\""
+  alias ll="$_ls_core_args -ltshc --author"
+  alias lsa="$_ls_core_args -ltshc --author --almost-all -I \".git\""
+  alias lt="tree -L 3 -I \".git|.cache|node_modules\""
+fi
 # }}}
 
 # {{{ Archives
@@ -85,8 +101,7 @@ function extract() {
 alias extr="extract "
 
 function extract_and_remove() {
-  extract "$1"
-  rm -f "$1"
+  extract "$1" && rm -f "$1"
 }
 alias extrr="extract_and_remove "
 # }}}
@@ -135,35 +150,43 @@ alias gwp="git worktree prune"
 # }}}
 
 # {{{ System
+### Toolboxes
+if [[ -x "$(command -v distrobox)" ]]; then
+  alias tbw="distrobox-enter --name work"
+  alias tbe="distrobox-enter --name env"
+  alias tbd="distrobox-enter --name dev"
+fi
+
 ### Utilities
 alias df="df -h"
 alias du="du -h"
 alias mkdir="mkdir -p "
+alias cpr="cp -r "
+alias grep="grep --color=auto "
+alias watch="watch -pc "
 
 # Neovim
-alias vi="nvim "
+[[ -x "$(command -v nvim)" ]] && alias vi="nvim "
+
+# Emacs
+# This starts Emacs in terminal and starts daemon mode if not using it yet then enters emacs
+[[ -x "$(command -v emacs)" ]] && alias em="emacsclient -c -t -a '' "
 
 # Haskell Stack
-alias ghc="stack ghc"
-alias ghci="stack ghci"
-alias runghc="stack runghc"
+if [[ -d "$HOME/.stack" ]]; then
+  alias ghc="stack ghc"
+  alias ghci="stack ghci"
+  alias runghc="stack runghc"
+fi
 
 # Enable aliases to be sudo’ed
 alias sudo="sudo "
 
 # Reload the shell (i.e. invoke as a login shell)
-alias reload="exec ${SHELL} -l"
+alias reload='exec "${SHELL}" -l'
 
 # Print each PATH entry on a separate line
-alias path='echo -e ${PATH//:/\\n}'
-
-### Make and compilers
-CORES="$(nproc)"
-# Use only the half of cores, e.g. 4 cores => 2 jobs
-# this is for limiting the melting of my processor, specially with rustc.
-JOBS="$(expr $CORES / 2)"
-alias make="make -j$JOBS"
-alias cargob="cargo build -j $JOBS"
+alias path='echo -e "${PATH//:/\\n}"'
 
 # Wget
 function wget_archive_and_extract() {
@@ -179,20 +202,42 @@ function wget_archive_and_extract() {
 }
 alias wgetae="wget_archive_and_extract "
 
+alias ssh="TERM=xterm-256color ssh"
+
+### Make and compilers
+CORES="$(nproc)"
+# Use only the half of cores, e.g. 4 cores => 2 jobs
+# this is for limiting the melting of my processor, specially with rustc.
+JOBS="$(expr $CORES / 2)"
+alias make="make -j$JOBS"
+# alias cargob="cargo build -j $JOBS"
+
+# Run zig from its installation path (extracted from tarball)
+if [[ -d "$HOME/.local/zig/current" ]]; then
+  alias zb="zig build --prominent-compile-errors "
+  alias zr="zig run "
+  alias zt="zig test "
+  alias zfmt="zig fmt "
+fi
+
 # }}}
 
 # {{{ Kitty
-alias dcat="kitty +kitten diff"
-alias icat="kitty +kitten icat"
-if [[ "$TERM" == "xterm-kitty" ]]; then
-  alias ssh="kitty +kitten ssh"
+if [[ -x "$(command -v kitty)" ]]; then
+  alias dcat="kitty +kitten diff"
+  alias icat="kitty +kitten icat"
+  if [[ "$TERM" == "xterm-kitty" ]]; then
+    alias ssh="kitty +kitten ssh"
+  fi
 fi
 # }}}
 
 # {{{ theme.sh
-alias th="theme.sh -i"
-alias thl="theme.sh --light -i"
-alias thd="theme.sh --dark -i"
+if [[ -x "$(command -v theme.sh)" ]]; then
+  alias th="theme.sh -i"
+  alias thl="theme.sh --light -i"
+  alias thd="theme.sh --dark -i"
+fi
 # }}}
 
 # vim: fdm=marker ft=bash sw=2 ts=2

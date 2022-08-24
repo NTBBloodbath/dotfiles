@@ -1,3 +1,6 @@
+# Set GPG TTY in Termux, solve issues while signing commits
+[[ -n "$TERMUX_VERSION" ]] && export GPG_TTY="$TTY"
+
 # {{{ p10k instant prompt
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -14,7 +17,7 @@ if [[ ! -f "$ZINIT_HOME/bin/zinit.zsh" ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}ZINIT%F{220} Plugins Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$ZINIT_HOME" && \
         command chmod g-rwX "$ZINIT_HOME" 
-    command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME/bin" && \
+    command git clone --depth 1 https://github.com/zdharma-continuum/zinit "$ZINIT_HOME/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -35,6 +38,8 @@ unsetopt case_glob
 setopt extendedglob
 # Automatically cd if a directory is entered
 setopt autocd
+# make cd push the old directory onto the directory stack
+setopt auto_pushd
 # No beep
 setopt no_beep
 # Recognize comments
@@ -91,28 +96,39 @@ fi
 if [[ -d "$HOME/.luarocks/bin" ]]; then
   export PATH=$HOME/.luarocks/bin:$PATH
 fi
-if [[ -d "$HOME/.stack/programs/x86_64-linux" ]]; then
-  export PATH=$HOME/.stack/programs/x86_64-linux/ghc-tinfo6-8.10.7/bin:$PATH
+if [[ -d "$HOME/.local/zig/current" ]]; then
+  export PATH=$HOME/.local/zig/current:$PATH
 fi
+# if [[ -d "$HOME/.stack/programs/x86_64-linux" ]]; then
+#   export PATH=$HOME/.stack/programs/x86_64-linux/ghc-tinfo6-8.10.7/bin:$PATH
+# fi
 
 # XDG directories
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
 # Editor
 export EDITOR=nvim
 
 # Language
-# export LANG="en_us.UTF-8"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Tokens and API keys
-[[ ! -f $XDG_CONFIG_HOME/zsh/tk.zsh ]] || source $XDG_CONFIG_HOME/zsh/tk.zsh
+[[ ! -f "$XDG_CONFIG_HOME/zsh/tk.zsh" ]] || source "$XDG_CONFIG_HOME/zsh/tk.zsh"
 
 # Use Neovim as the man pager
 export MANPAGER="nvim +Man!"
 
-# Start lenv (Lua version manager)
-[[ ! -f $HOME/.lenvrc ]] || source $HOME/.lenvrc
+# Source Lua version manager and clone it if not found on system
+export LUVER_DIR="${XDG_DATA_HOME:-"$HOME/.local/share"}/luver"
+if [[ ! -d "${LUVER_DIR}/self" ]]; then
+  git clone --quiet --depth 1 https://github.com/MunifTanjim/luver.git "$LUVER_DIR/self"
+fi
+
+[[ ! -f "$LUVER_DIR/self/luver.plugin.zsh" ]] || source "$LUVER_DIR/self/luver.plugin.zsh"
 
 # Load XMake profile
 [[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile"
@@ -124,13 +140,13 @@ export MANPAGER="nvim +Man!"
 # fi
 
 # {{{ Blur kitty terminal
-if [[ "$TERM" == "xterm-kitty" ]]; then
-  if [[ $(ps --no-header -p $PPID -o comm) =~ '^kitty$' ]]; then
-    for wid in $(xdotool search --pid $PPID); do
-      xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid;
-    done
-  fi
-fi
+# if [[ "$TERM" == "xterm-kitty" ]]; then
+#   if [[ $(ps --no-header -p $PPID -o comm) =~ '^kitty$' ]]; then
+#     for wid in $(toolbox run --container env xdotool search --pid $PPID); do
+#       xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid;
+#     done
+#   fi
+# fi
 # }}}
 # }}}
 
@@ -143,6 +159,15 @@ zinit snippet $XDG_CONFIG_HOME/zsh/aliases
 
 # {{{ p10k theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Custom functions
+distrobx() {
+  if [ -f /run/.containerenv ]; then
+    local _distrobox_name="$(cat /run/.containerenv | awk -F= '$1=="name" { print $2 }' | tr -d '"')"
+    echo -n "%{%F{magenta}%}⬢ %{%F{white}%}$_distrobox_name%{%f%}"
+  fi
+}
+
 # }}}
 
 setopt promptsubst
@@ -194,11 +219,35 @@ zinit wait lucid light-mode for \
     ' \
       zdharma-continuum/history-search-multi-word \
     hlissner/zsh-autopair
+
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
+# {{{ ZSH Vi Mode setup
+# Use jk to exit insert mode 
+# ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+# }}}
+
 # }}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $XDG_CONFIG_HOME/zsh/p10k.zsh ]] || source $XDG_CONFIG_HOME/zsh/p10k.zsh
+POWERLEVEL9K_CUSTOM_DISTROBOX="distrobx"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_distrobox dir vcs newline)
 
+# }}}
+
+# {{{ Cursor shape (Termux)
+if [[ -n "$TERMUX_VERSION" ]]; then
+  _change_cursor() {
+    # Block
+    # echo -ne '\e[2 q'
+    # Underline
+    # echo -ne '\e[4 q'
+    # Bar
+    echo -ne '\e[6 q'
+  }
+  precmd_functions+=(_change_cursor)
+fi
 # }}}
 
 # vim: fdm=marker sw=2 ts=2
