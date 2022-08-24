@@ -1,0 +1,68 @@
+#!/bin/bash
+
+ROOT=$HOME/.local/zig
+REPO_URL=https://ziglang.org/download/index.json
+TMPDIR=/tmp/zig
+SCRIPT_NAME=$(basename "$0")
+
+REPO_ENTRY=$1
+VERSION=${2:-master}
+
+function die()
+{
+	echo "$@"
+	rm -rf ${TMPDIR}
+	exit 1
+}
+
+if [ -z "${1}" ]; then
+  # Get architecture
+  arch=$(uname -m)
+  # Get OS name and lowercase it
+  os=$(uname -s)
+  os=${os,}
+  # Set default repo entry to arch-os, e.g. x86_64-linux
+  REPO_ENTRY="${arch}-${os}"
+  # echo -e "Usage: ${SCRIPT_NAME} arch\n Arch according to ${REPO_URL}"
+  # curl -s https://ziglang.org/download/index.json | jq '.master | keys'
+  # exit 1
+fi
+
+mkdir -p "$ROOT/ver"
+
+REPO="${TMPDIR}/zig-repo.json"
+
+mkdir -p "${TMPDIR}"
+
+echo "Downloading repository..."
+
+curl -s "${REPO_URL}" | jq ".\"${VERSION}\"[\"${REPO_ENTRY}\"]" > "${REPO}" || die "failed to aquire repo!"
+
+TARBALL=$(jq --raw-output '.tarball' ${REPO})
+SHASUM=$(jq --raw-output '.shasum' ${REPO})
+SIZE=$(jq --raw-output '.size' ${REPO})
+
+FULLVER=$(basename ${TARBALL} .tar.xz)
+
+echo "$TARBALL"
+echo "$FULLVER"
+
+[ "${FULLVER}" != "" ] || die "Could not extract version info"
+
+if [ $(basename $(readlink -f ${ROOT}/current)) = ${FULLVER} ]; then
+	echo "${FULLVER} is already the current version!"
+else
+	echo "Updating to ${FULLVER}"
+
+	if curl "${TARBALL}" | tar -xJC ${ROOT}/ver; then
+		ln -sfn "${ROOT}/ver/${FULLVER}" "${ROOT}/current" || die "failed to set new symlink!"
+	else
+		echo "Update failed!"
+		rm -rf "${ROOT}/ver/${FULLVER}"
+	fi
+fi
+
+echo "Current version is now: $($ROOT/current/zig version)"
+echo "Add \$HOME/.local/zig/current to your PATH"
+
+rm -r ${TMPDIR}
