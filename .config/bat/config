@@ -4,7 +4,7 @@
 
 # Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
 # for a list of all available themes
---theme="doom-one"
+--theme="base16-256"
 
 # Enable this to use italic text on the terminal. This is not supported on all
 # terminal emulators (like tmux, by default):
@@ -28,4 +28,5 @@
 #   Example 1: use the C++ syntax for .ino files
 #   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
 --map-syntax='*.conf:INI'
+--map-syntax='*.fnl:Clojure'
 --map-syntax ".ignore:Git Ignore"
