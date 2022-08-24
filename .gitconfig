@@ -3,7 +3,7 @@
 	email = bloodbathalchemist@protonmail.com
 
 [init]
-	defaultbranch = main
+	defaultbranch = master
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -27,10 +27,13 @@
 	s = status -s
 
 	# Pull in remote changes for the current repository and all its submodules
-	p = pull --recurse-submodules
+	ps = pull --recurse-submodules
+
+    # Clone a repository
+    c = clone
 
 	# Clone a repository including all submodules
-	c = clone --recursive
+	cs = clone --recursive
 
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -104,10 +107,10 @@
 	prompt = false
 
 [pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+    ; diff = delta
+    ; log = delta
+    ; reflog = delta
+    ; show = delta
 
 [interactive]
     diffFilter = delta --color-only
@@ -179,6 +182,3 @@
 
 [pull]
 	rebase = true
-
-[maintenance]
-	repo = /home/alejandro/Development/Clang/lcfetch
