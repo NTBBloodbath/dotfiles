@@ -53,9 +53,18 @@ if [ $(basename $(readlink -f ${ROOT}/current)) = ${FULLVER} ]; then
 	echo "${FULLVER} is already the current version!"
 else
 	echo "Updating to ${FULLVER}"
+	_did_cleanup=false
 
 	if curl "${TARBALL}" | tar -xJC ${ROOT}/ver; then
 		ln -sfn "${ROOT}/ver/${FULLVER}" "${ROOT}/current" || die "failed to set new symlink!"
+		for _ver in "$(find "${ROOT}/ver/*" -maxdepth 0 -type d)"; do
+		    # Clean up old installed versions
+		    if [ "$_ver" != "${ROOT}/ver/${FULLVER}" ]; then
+    		    rm -rf "$_ver"
+    		    _did_cleanup=true
+    		fi
+		done
+		[ "$_did_cleanup" = true ] && echo "Deleted old Zig versions"
 	else
 		echo "Update failed!"
 		rm -rf "${ROOT}/ver/${FULLVER}"
