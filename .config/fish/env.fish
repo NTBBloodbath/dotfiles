@@ -77,14 +77,17 @@ set -Ux EDITOR "nvim"
 # Use Neovim as the man pager
 set -Ux MANPAGER "nvim +Man!"
 
-# Set GPG TTY in Termux, solve issues while signing commits
-if set -q TERMUX_VERSION
-   set -x GPG_TTY $(tty)
-end
+# FZF options
+set -Ux FZF_DEFAULT_OPTS +i +s --ansi --exact --header-first --color=16 --tabstop=4 --border=rounded --info=inline
 
 # LESS with colors
 # from http://blog.0x1fff.com/2009/11/linux-tip-color-enabled-pager-less.html
 set -Ux LESS "-RSM~gIsw"
+
+# Set GPG TTY in Termux, solve issues while signing commits
+if set -q TERMUX_VERSION
+   set -x GPG_TTY $(tty)
+end
 
 # Processor cores
 # Use only half of cores, this is for limiting the melting of my processor

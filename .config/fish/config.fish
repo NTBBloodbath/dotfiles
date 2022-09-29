@@ -18,6 +18,30 @@ if functions -q tide
    set -g tide_right_prompt_items status cmd_duration jobs time
 end
 # }}}
+
+# FZF {{{
+if functions -q fzf_configure_bindings
+   # Set FZF headers
+   set -g fzf_dir_opts --header="Search file"
+   set -g fzf_git_log_opts --header="Git logs"
+   set -g fzf_git_status_opts --header="Git status"
+   set -g fzf_shell_vars_opts --header="Search shell variables"
+   set -g fzf_processes_opts --header="Search processes"
+   set -g fzf_history_opts --header="Search fish history"
+
+   set fzf_fd_opts --hidden --exclude=.git --exclude=.cache --exclude=node_modules --exclude=__pycache__ --exclude=zig-cache
+
+   # Use exa if possible for directory preview command
+   if command -qs exa
+      set fzf_preview_dir_cmd exa --all --color=always
+   end
+
+   # Use cat if bat is not available
+   if not command -qs bat
+      set fzf_preview_file_cmd cat
+   end
+end
+# }}}
 # }}}
 
 # Personal configurations {{{
