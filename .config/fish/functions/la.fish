@@ -13,7 +13,7 @@ function la
 end
 
 # Exa arguments
-if type -q exa
+if command -qs exa
    if not set -q EXA_CORE_ARGS
       set -Ux EXA_CORE_ARGS --group --header --icons --group-directories-first
    end

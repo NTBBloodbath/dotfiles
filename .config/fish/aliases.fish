@@ -11,19 +11,19 @@ alias ......="cd ../../../../.."
 # Editors
 #
 # Neovim
-if type -q nvim
+if command -qs nvim
    alias vi=nvim
 end
 
 # Emacs
-if type -q emacs
+if command -qs emacs
    alias em="emacsclient -c -t -a ''"
 end
 
 # Programming
 #
 # Zig
-if type -q zig
+if command -qs zig
    alias zb="zig build --prominent-compile-errors"
    alias zr="zig run"
    alias zt="zig test"
@@ -35,7 +35,7 @@ alias make="make -j $JOBS"
 
 # Containers
 #
-if type -q distrobox
+if command -qs distrobox
    alias tbe="distrobox-enter --name env"
    alias tbd="distrobox-enter --name dev"
 end
@@ -60,7 +60,7 @@ alias reload="source $HOME/.config/fish/config.fish"
 # Terminals
 #
 # Kitty
-if type -q kitty
+if command -qs kitty
    alias dcat="kitty +kitten diff"
    alias icat="kitty +kitten icat"
 
