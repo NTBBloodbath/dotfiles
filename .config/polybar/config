@@ -75,7 +75,7 @@ margin-bottom = 0
 
 ;------------------------------------------------;
 ;                                                ;
-;             AWESOME BAR MODULES                ;
+;                    BAR MODULES                 ;
 ;                                                ;
 ;------------------------------------------------;
 
@@ -224,7 +224,7 @@ menu-0-0-exec = poweroff
 menu-0-1 = "  "
 menu-0-1-exec = reboot
 menu-0-2 = "  "
-menu-0-2-exec = awesome quit
+menu-0-2-exec = herbstclient quit
 
 ;------------------------------------------------;
 ;                                                ;
@@ -261,7 +261,7 @@ exec = ~/.config/polybar/scripts/cpu-usage.sh
 ;------------------------------------------------;
 [module/pavolume]
 type = custom/script
-interval = 0.5
+interval = 1
 label=%output%
 label-padding = 2
 label-background = ${colors.background}
@@ -356,11 +356,11 @@ type = custom/text
 content = "  "
 content-background=${colors.background}
 
-[module/left-awesome]
+[module/left-workspaces]
 inherit = module/left-glyph
 content-foreground = ${colors.background-alt}
 
-[module/right-awesome]
+[module/right-workspaces]
 inherit = module/right-glyph
 content-foreground = ${colors.background-alt}
 
