@@ -1,7 +1,8 @@
 # Plugins {{{
-# Bootstrap fisher if not installed yet {{{
+# Bootstrap fisher if not installed yet and install plugins {{{
 if not functions -q fisher
-   eval (curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher)
+   curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+   fisher update
 end
 # }}}
 
