@@ -20,25 +20,8 @@ if command -qs emacs
    alias em="emacsclient -c -t -a ''"
 end
 
-# Programming
-#
-# Zig
-if command -qs zig
-   alias zb="zig build --prominent-compile-errors"
-   alias zr="zig run"
-   alias zt="zig test"
-   alias zfmt="zig fmt"
-end
-
 # Make
 alias make="make -j $JOBS"
-
-# Containers
-#
-if command -qs distrobox
-   alias tbe="distrobox-enter --name env"
-   alias tbd="distrobox-enter --name dev"
-end
 
 # Utilities
 #

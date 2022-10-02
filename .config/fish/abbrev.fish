@@ -70,4 +70,21 @@ abbr -a gwa git worktree add
 abbr -a gwp git worktree prune
 # }}}
 
+# Development {{{
+#
+# Zig
+if command -qs zig
+   abbr -a zb zig build --prominent-compile-errors
+   abbr -a zr zig run
+   abbr -a zt zig test
+   abbr -a zfmt zig fmt
+end
+
+# Containers
+if command -qs distrobox
+   abbr -a tbe distrobox-enter --name env
+   abbr -a tbd distrobox-enter --name dev
+end
+# }}}
+
 # vim: sw=3:ts=3:sts=3:ft=fish:fdm=marker:fdl=0
