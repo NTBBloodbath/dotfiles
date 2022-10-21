@@ -1,12 +1,17 @@
 # Language {{{
-set -x LC_ALL en_US.UTF-8
+# set -x LC_ALL en_US.UTF-8
 # set -x LC_CTYPE en_US.UTF-8
 set -x LANG en_US.UTF-8
 # }}}
 
 # Custom PATH {{{
 #
-set -l paths "$HOME/.local/bin" "$HOME/.luarocks/bin" "$HOME/.local/zig/current" "$HOME/.config/emacs/bin"
+set -l paths "$HOME/.local/bin"
+set -a paths "$HOME/.bun/bin"
+set -a paths "$HOME/.local/zig/current"
+set -a paths "$HOME/.luarocks/bin"
+set -a paths "$HOME/.lenv/current/bin"
+set -a paths "$HOME/.lenv/current/luarocks/3.9.1/bin"
 
 # Set PATH and avoid duplicates when spawning a terminal in Neovim
 for path in $paths
