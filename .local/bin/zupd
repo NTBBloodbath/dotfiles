@@ -57,7 +57,7 @@ else
 
 	if curl "${TARBALL}" | tar -xJC ${ROOT}/ver; then
 		ln -sfn "${ROOT}/ver/${FULLVER}" "${ROOT}/current" || die "failed to set new symlink!"
-		for _ver in "$(find "${ROOT}/ver/*" -maxdepth 0 -type d)"; do
+		for _ver in "$(find "${ROOT}/ver" -maxdepth 1 -mindepth 1 -type d)"; do
 		    # Clean up old installed versions
 		    if [ "$_ver" != "${ROOT}/ver/${FULLVER}" ]; then
     		    rm -rf "$_ver"
