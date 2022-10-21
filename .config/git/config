@@ -141,6 +141,7 @@
 
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+	autoSetupRemote = true
 
 [status]
 	submoduleSummary = true
@@ -182,3 +183,6 @@
 
 [pull]
 	rebase = true
+
+[gpg]
+	program = gpg2
