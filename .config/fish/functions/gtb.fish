@@ -1,6 +1,6 @@
 function gtb
    for branch in $(git branch --all | grep "^\s*remotes" | egrep --invert-match "(:?HEAD|master|main)\$")
-      git branch --track (string replace -r ".+\/.+\/" "" $branch) $branch
+      git branch --track (string trim (string replace -r ".+\/.+\/" "" $branch)) (string trim $branch)
    end
 end
 
