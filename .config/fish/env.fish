@@ -55,7 +55,7 @@ set -Ux ANDROID_HOME "$XDG_DATA_HOME/android"
 set -Ux GTK2_RC_FILES "$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 # Cursors
-set -Ux XCURSOR_PATH "$XDG_DATA_HOME/icons" $XCURSOR_PATH
+# set -Ux XCURSOR_PATH "$XDG_DATA_HOME/icons" $XCURSOR_PATH
 
 # KDE
 # set -Ux KDEHOME "$XDG_CONFIG_HOME/kde"
@@ -83,17 +83,24 @@ set -Ux EDITOR "nvim"
 # Use Neovim as the man pager
 set -Ux MANPAGER "nvim +Man!"
 
+# Elixir's IEX shell history
+set -Ux ERL_AFLAGS "-kernel shell_history enabled"
+
 # FZF options
-set -Ux FZF_DEFAULT_OPTS +i +s --ansi --exact --header-first --color=16 --tabstop=4 --border=rounded --info=inline
+set -Ux FZF_DEFAULT_OPTS "\
+   +i +s --ansi --exact --header-first --color=16 --tabstop=4 --border=rounded --info=inline\
+   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # LESS with colors
 # from http://blog.0x1fff.com/2009/11/linux-tip-color-enabled-pager-less.html
 set -Ux LESS "-RSM~gIsw"
 
-# Set GPG TTY in Termux, solve issues while signing commits
-if set -q TERMUX_VERSION
-   set -x GPG_TTY $(tty)
-end
+# Set GPG TTY, solve issues while signing commits
+# if set -q TERMUX_VERSION
+set -x GPG_TTY $(tty)
+# end
 
 # Processor cores
 # Use only half of cores, this is for limiting the melting of my processor
