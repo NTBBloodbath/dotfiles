@@ -8,7 +8,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Check for arguments
 if [[ "$#" -gt 0 ]]; then
-    _polybar_config_file="$HOME/.config/polybar/config"
+    _polybar_config_file="$HOME/.config/polybar/config.ini"
     # Launch bars
     if [[ ! "$#" -gt 1 ]]; then
         ~/.local/bin/polybar --log=error "$1" &

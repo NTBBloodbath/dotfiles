@@ -21,7 +21,7 @@ get_cpu_temp() {
     fi
     average=$(echo "$average" | sed 's/$/°C/g')
 
-    echo "%{F#ff6c6b}$temp_status%{F-} $average"
+    echo "%{F#f38ba8}$temp_status%{F-} $average"
 }
 
 get_cpu_temp

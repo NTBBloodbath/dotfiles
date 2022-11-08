@@ -153,20 +153,20 @@ function output() {
 
     # Set volume bar
     local percentage=$(( curVol / 10 ))
-    local percentage_bars="%{F#98be65}"
+    local percentage_bars="%{F#a6e3a1}"
     if [ "$percentage" -eq 0 ]
     then
-        percentage_bars+="%{F-}%{F#5B6268}──────────"
+        percentage_bars+="%{F-}%{F#585b70}──────────"
     elif [ "$percentage" -eq 1 ]
     then
-        percentage_bars+="─%{F-}%{F#5B6268}─────────"
+        percentage_bars+="─%{F-}%{F#585b70}─────────"
     else
         for ((i = 1 ; i <= 10 ; i++))
         do
             percentage_bars+="─"
             if [ "$i" = "$percentage" ]
             then
-                percentage_bars+="%{F-}%{F#5B6268}"
+                percentage_bars+="%{F-}%{F#585b70}"
             fi
         done
     fi
@@ -174,9 +174,9 @@ function output() {
 
     if [ "${curStatus}" = 'yes' ]
     then
-        echo "婢 $percentage_bars %{F#bbc2cf}$curVol%%{F-}"
+        echo "婢 $percentage_bars %{F#cdd6f4}$curVol%%{F-}"
     else
-        echo " $percentage_bars %{F#bbc2cf}$curVol%%{F-}"
+        echo " $percentage_bars %{F#cdd6f4}$curVol%%{F-}"
     fi
 } #}}}
 
