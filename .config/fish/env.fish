@@ -8,6 +8,7 @@ set -x LANG en_US.UTF-8
 #
 set -l paths "$HOME/.local/bin"
 set -a paths "$HOME/.bun/bin"
+set -a paths "$HOME/.local/julia/bin"
 set -a paths "$HOME/.local/zig/current"
 set -a paths "$HOME/.luarocks/bin"
 set -a paths "$HOME/.lenv/current/bin"

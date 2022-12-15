@@ -5,8 +5,10 @@ abbr -a dev cd $HOME/Development
 abbr -a zdev cd $HOME/Development/Zig
 abbr -a cdev cd $HOME/Development/Clang
 abbr -a edev cd $HOME/Development/Elixir
+abbr -a jldev cd $HOME/Development/Julia
 abbr -a pydev cd $HOME/Development/Python
 abbr -a nodev cd $HOME/Development/Node
+abbr -a asmdev cd $HOME/Development/Assembly
 # abbr -a hskdev cd $HOME/Development/Haskell
 abbr -a miscdev cd $HOME/Development/Misc
 abbr -a nvimdev cd $HOME/Development/Nvim
