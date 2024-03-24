@@ -12,14 +12,14 @@ function ll
    ls $LS_CORE_ARGS -ltshc --author $argv
 end
 
-# Exa arguments
-if command -qs exa
-   if not set -q EXA_CORE_ARGS
-      set -Ux EXA_CORE_ARGS --group --header --icons --group-directories-first
+# Eza arguments
+if command -qs eza
+   if not set -q EZA_CORE_ARGS
+      set -Ux EZA_CORE_ARGS --group --header --icons --group-directories-first
    end
 
    function ll
-      exa $EXA_CORE_ARGS --long --grid --accessed --modified --created $argv
+      eza $EZA_CORE_ARGS --long --grid --accessed --modified --created $argv
    end
 end
 

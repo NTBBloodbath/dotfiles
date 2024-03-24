@@ -6,19 +6,22 @@ set -x LANG en_US.UTF-8
 
 # Custom PATH {{{
 #
-set -l paths "$HOME/.local/bin"
-set -a paths "$HOME/.bun/bin"
-set -a paths "$HOME/.local/julia/bin"
-set -a paths "$HOME/.local/zig/current"
+set -l paths "$HOME/.bun/bin"
+set -a paths "$HOME/.cargo/bin"
+set -a paths "$HOME/.local/bin"
+set -a paths "$HOME/.local/zig/nightly"
 set -a paths "$HOME/.luarocks/bin"
-set -a paths "$HOME/.lenv/current/bin"
-set -a paths "$HOME/.lenv/current/luarocks/3.9.1/bin"
+
+# Android SDK on Arch WSL
+set -a paths "/opt/android-sdk/tools"
+set -a paths "/opt/android-sdk/platform-tools"
 
 # Set PATH and avoid duplicates when spawning a terminal in Neovim
 for path in $paths
-   if not contains $path $PATH
-      set PATH $path $PATH
-   end
+   fish_add_path $path
+   # if not contains $path $PATH
+      # set -gx PATH $path $PATH
+   # end
 end
 
 # Print PATH to stdout
@@ -47,7 +50,8 @@ set -Ux XDG_CACHE_HOME "$HOME/.cache"
 # Clean $HOME {{{
 #
 # ADB
-set -Ux ANDROID_HOME "$XDG_DATA_HOME/android"
+# set -Ux ANDROID_HOME "$XDG_DATA_HOME/android"
+set -Ux ANDROID_HOME "/opt/android-sdk"
 
 # GPG
 # set -Ux GNUPGHOME "$XDG_DATA_HOME/gnupg"
@@ -88,11 +92,11 @@ set -Ux MANPAGER "nvim +Man!"
 set -Ux ERL_AFLAGS "-kernel shell_history enabled"
 
 # FZF options
-set -Ux FZF_DEFAULT_OPTS "\
-   +i +s --ansi --exact --header-first --color=16 --tabstop=4 --border=rounded --info=inline\
-   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+# set -Ux FZF_DEFAULT_OPTS "\
+#    +i +s --ansi --exact --header-first --color=16 --tabstop=4 --border=rounded --info=inline\
+#    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+#    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+#    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # LESS with colors
 # from http://blog.0x1fff.com/2009/11/linux-tip-color-enabled-pager-less.html
@@ -105,8 +109,8 @@ set -x GPG_TTY $(tty)
 
 # Processor cores
 # Use only half of cores, this is for limiting the melting of my processor
-set -Ux CORES $(nproc)
-set -Ux JOBS (math $CORES / 2)
+# set -Ux CORES $(nproc)
+# set -Ux JOBS (math $CORES / 2)
 # }}}
 
 # vim: sw=3:ts=3:sts=3:ft=fish:fdm=marker:fdl=0

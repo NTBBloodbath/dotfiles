@@ -1,6 +1,7 @@
 [user]
 	name = NTBBloodbath
 	email = bloodbathalchemist@protonmail.com
+	signingkey = 18D6730BC846AAC5
 
 [init]
 	defaultbranch = master
@@ -17,20 +18,20 @@
 	verbose = true
 
 [alias]
-    # Undo latest commit
-    undo = reset --soft HEAD^
+	# Undo latest commit
+	undo = reset --soft HEAD^
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' -n 20 --graph --abbrev-commit --date=relative
 
 	# View the current working tree status using the short format
-	s = status -s
+	s = status -s --show-stash
 
 	# Pull in remote changes for the current repository and all its submodules
 	ps = pull --recurse-submodules
 
-    # Clone a repository
-    c = clone
+	# Clone a repository
+	c = clone
 
 	# Clone a repository including all submodules
 	cs = clone --recursive
@@ -39,20 +40,20 @@
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
 	# Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	sb = "!f() { git switch --create \"$1\" 2>/dev/null || git switch \"$1\"; }; f"
 
 	# Find branches containing commit
 	fb = "!f() { git branch -a --contains $1; }; f"
 
 	# Find tags containing commit
 	ft = "!f() { git describe --always --contains $1; }; f"
-	
+
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
 	# List contributors with number of commits.
 	contributors = shortlog --summary --numbered
-	
+
 	# List aliases
 	aliases = config --get-regexp alias
 
@@ -106,35 +107,6 @@
 	writeToTemp = true
 	prompt = false
 
-[pager]
-    ; diff = delta
-    ; log = delta
-    ; reflog = delta
-    ; show = delta
-
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    features = side-by-side unobtrusive-line-numbers decorations
-    syntax-theme = "doom-one"
-    navigate = true
-    whitespace-error-style = 22 reverse
-[delta "unobtrusive-line-numbers"]
-    line-numbers = true
-    line-numbers-minus-style = "#ff6c6b"
-    line-numbers-zero-style = "#bbc2cf"
-    line-numbers-plus-style = "#98be65"
-    line-numbers-left-format = "{nm:>4}┊"
-    line-numbers-right-format = "{np:>4}│"
-    line-numbers-left-style = blue
-    line-numbers-right-style = blue
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
-    hunk-header-decoration-style = yellow box
-
 [push]
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple
@@ -148,18 +120,18 @@
 	showUntrackedFiles = all
 
 [color "branch"]
-    upstream = cyan
+	upstream = cyan
 
 [tag]
 	sort = version:refname
 
 [versionsort]
-  prereleaseSuffix = -pre
-  prereleaseSuffix = .pre
-  prereleaseSuffix = -beta
-  prereleaseSuffix = .beta
-  prereleaseSuffix = -rc
-    prereleaseSuffix = .rc
+	prereleaseSuffix = -pre
+	prereleaseSuffix = .pre
+	prereleaseSuffix = -beta
+	prereleaseSuffix = .beta
+	prereleaseSuffix = -rc
+	prereleaseSuffix = .rc
 
 ##### Github specific
 [github]

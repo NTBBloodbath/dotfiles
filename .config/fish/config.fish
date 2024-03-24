@@ -1,9 +1,9 @@
 # Plugins {{{
 # Bootstrap fisher if not installed yet and install plugins {{{
-if not functions -q fisher
-   curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
-   fisher update
-end
+#if not functions -q fisher
+#   curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+#   fisher update
+#end
 # }}}
 
 # Set up tide theme {{{
@@ -31,9 +31,9 @@ if functions -q fzf_configure_bindings
 
    set fzf_fd_opts --hidden --exclude=.git --exclude=.cache --exclude=node_modules --exclude=__pycache__ --exclude=zig-cache
 
-   # Use exa if possible for directory preview command
-   if command -qs exa
-      set fzf_preview_dir_cmd exa --all --color=always
+   # Use eza if possible for directory preview command
+   if command -qs eza
+      set fzf_preview_dir_cmd eza --all --color=always
    end
 
    # Use cat if bat is not available

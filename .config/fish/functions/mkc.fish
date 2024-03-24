@@ -1,7 +1,7 @@
 function mkc
    if not set -q argv[1]
       echo "Usage: mkc <path>"
-      return false
+      return 1
    end
 
    mkdir -pv $argv[1]

@@ -12,14 +12,14 @@ function lt
    tree -L 3 -I ".git|.cache|node_modules|__pycache__|zig-cache" $argv
 end
 
-# Exa arguments
-if command -qs exa
-   if not set -q EXA_CORE_ARGS
-      set -Ux EXA_CORE_ARGS --group --header --icons --group-directories-first
+# Eza arguments
+if command -qs eza
+   if not set -q EZA_CORE_ARGS
+      set -Ux EZA_CORE_ARGS --group --header --icons --group-directories-first
    end
 
    function lt
-      exa $EXA_CORE_ARGS --all --tree --level=3 --ignore-glob=".git|.cache|node_modules|__pycache__|zig-cache" $argv
+      eza $EZA_CORE_ARGS --all --tree --level=3 --ignore-glob=".git|.cache|node_modules|__pycache__|zig-cache" $argv
    end
 end
 

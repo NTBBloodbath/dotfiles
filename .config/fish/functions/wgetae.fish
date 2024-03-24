@@ -1,7 +1,7 @@
 function wgetae
    if not set -q argv[1]
       echo "Usage: wgetae <url>"
-      return false
+      return 1
    end
 
    set -l url $argv[1]

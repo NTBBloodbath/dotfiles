@@ -1,0 +1,72 @@
+###------------------------------------
+##   Theming
+#--------------------------------------
+theme = tokyonight
+
+###------------------------------------
+##   Font
+#--------------------------------------
+font-size = 13
+font-family = CartographCF Nerd Font
+#font-family-bold = SFMono Nerd Font
+#font-family-italic = CartographCF Nerd Font
+#font-family-bold-italic = CartographCF Nerd Font
+
+###------------------------------------
+##   Cursor
+#--------------------------------------
+cursor-style = bar
+cursor-style-blink = true
+
+###------------------------------------
+##   Background
+#--------------------------------------
+background-opacity = 1
+background-blur-radius = 20
+
+###------------------------------------
+##   Padding
+#--------------------------------------
+window-padding-x = 0
+window-padding-y = 0
+
+###------------------------------------
+##   Window size
+#--------------------------------------
+window-width = 100
+window-height = 25
+
+###------------------------------------
+##   Behavior
+#--------------------------------------
+# title = Ghostty
+
+confirm-close-surface = false
+
+mouse-hide-while-typing = true
+
+copy-on-select = false
+
+shell-integration-features = no-cursor,sudo
+
+###------------------------------------
+##   Keybindings
+#--------------------------------------
+keybind = super+shift+w=reload_config
+
+# Split creation
+keybind = alt+v=new_split:right
+keybind = alt+s=new_split:down
+
+# Split navigation
+keybind = ctrl+tab=goto_split:next
+keybind = ctrl+shift+tab=goto_split:previous
+
+# Split sizing
+keybind = ctrl+left=resize_split:left,20
+keybind = ctrl+right=resize_split:right,20
+keybind = ctrl+up=resize_split:up,20
+keybind = ctrl+down=resize_split:down,20
+keybind = ctrl+shift+equal=equalize_splits
+
+# vim: ft=conf

@@ -1,7 +1,7 @@
 function extr
    if not set -q argv[1]
       echo "Usage: extr <path/file_name>.<zip|rar|bz1|gz|tar|tbz|tbz2|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-      return false
+      return 1
    end
 
    switch $argv[1]
@@ -40,10 +40,6 @@ function extr
       case "*"
          echo "extr: '$argv[1]' - unknown archive method"
    end
-end
-
-function extrr
-   extr $argv && rm -fv $argv[1]
 end
 
 # vim: sw=3:ts=3:sts=3:ft=fish:fdm=marker:fdl=0

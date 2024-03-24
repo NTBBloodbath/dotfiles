@@ -12,14 +12,14 @@ function lsa
    ls $LS_CORE_ARGS -ltshc --author --almost-all -I ".git" $argv
 end
 
-# Exa arguments
-if command -qs exa
-   if not set -q EXA_CORE_ARGS
-      set -Ux EXA_CORE_ARGS --group --header --icons --group-directories-first
+# Eza arguments
+if command -qs eza
+   if not set -q EZA_CORE_ARGS
+      set -Ux EZA_CORE_ARGS --group --header --icons --group-directories-first
    end
 
    function lsa
-      exa $EXA_CORE_ARGS --all --long --grid --accessed --modified --created --ignore-glob=".git" $argv
+      eza $EZA_CORE_ARGS --all --long --grid --accessed --modified --created --ignore-glob=".git" $argv
    end
 end
 

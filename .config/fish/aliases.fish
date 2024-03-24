@@ -15,21 +15,21 @@ if command -qs nvim
    alias vi=nvim
 end
 
+# Update Neovim
+alias viup="make distclean && make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local/nvim install"
+
 # Emacs
 if command -qs emacs
    alias em="emacsclient -c -t -a ''"
 end
 
-# Make
-alias make="make -j $JOBS"
-
 # Utilities
 #
-# Enable aliases to be sudo'ed
-alias sudo=sudo
+# Improve make
+alias make="make -j$JOBS"
 
 # Always use a valid $TERM value for SSH-ing
-alias ssh="TERM=xterm-256color ssh"
+# alias ssh="TERM=xterm-256color ssh"
 
 # Saner defaults for some commands
 alias df="df -h"
@@ -40,16 +40,17 @@ alias watch="watch -pc"
 # Reload the shell
 alias reload="source $HOME/.config/fish/config.fish"
 
-# Terminals
-#
-# Kitty
-if command -qs kitty
-   alias dcat="kitty +kitten diff"
-   alias icat="kitty +kitten icat"
+# Spawn BASH with the system profile (I am spawning fish from my bashrc to keep POSIX stuff happy)
+alias bash="bash --rcfile /etc/profile"
 
-   if string match "kitty" $TERM
-      alias ssh="kitty +kitten ssh"
-   end
+# Reboot to UEFI
+alias uefi_reboot="systemctl reboot --firmware-setup"
+
+# MongoDB
+#
+# Turn off using `mongosh` and typing `db.shutdownServer()` command on it
+if command -qs mongod
+   alias start_mongo="mongod --config /usr/local/etc/mongod.conf --fork"
 end
 
 # vim: sw=3:ts=3:sts=3:ft=fish:fdm=marker:fdl=0
